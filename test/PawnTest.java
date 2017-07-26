@@ -1,5 +1,3 @@
-package chessgame;
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -11,7 +9,7 @@ public class PawnTest {
         verifyPawn("black");
     }
 
-    private void verifyPawn(final String color) {
+    void verifyPawn(final String color) {
         Pawn pawn = new Pawn(color);
         assertEquals(color, pawn.getColor());
     }
