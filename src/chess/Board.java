@@ -8,21 +8,33 @@ class Board {
     ArrayList<Pawn> whitePawns = new ArrayList<Pawn>();
     ArrayList<Pawn> blackPawns = new ArrayList<Pawn>();
     
-    void add(Pawn pawn) {
+    void addWhitePawn(Pawn pawn) {
         whitePawns.add(pawn);
     }
     
-    ArrayList<Pawn> getPawns() {
-        return whitePawns;
+    void addBlackPawn(Pawn pawn) {
+        blackPawns.add(pawn);
+    }
+    
+    Pawn findWhitePawn(int index) {
+        return whitePawns.get(index);
+    }
+    
+    Pawn findBlackPawn(int index) {
+        return blackPawns.get(index);
+    }
+    
+    int size() {
+        return whitePawns.size() + blackPawns.size();
     }
 
     void initialize() {
        for(int i = 0; i < 8; i++) {
-           whitePawns.add(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
+           addWhitePawn(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
        }
        
        for(int i = 0; i < 8; i++) {
-           blackPawns.add(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
+           addBlackPawn(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
        }
     }
 
