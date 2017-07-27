@@ -1,7 +1,6 @@
 package chess;
-import static org.junit.Assert.*;
 
-import java.util.ArrayList;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -11,16 +10,15 @@ public class BoardTest {
     @Test
     public void create() throws Exception {
         Board board = new Board();
-        ArrayList<Pawn> pawns = board.getPawns();
         
         Pawn white = new Pawn(Pawn.WHITE_COLOR);
         board.add(white);
-        assertEquals(1, pawns.size());
-        assertEquals(white, pawns.get(0));
+        assertEquals(1, board.size());
+        assertEquals(white, board.findPawn(0));
         
         Pawn black = new Pawn(Pawn.BLACK_COLOR);
         board.add(black); 
-        assertEquals(2, pawns.size());
-        assertEquals(black, pawns.get(1));
+        assertEquals(2, board.size());
+        assertEquals(black, board.findPawn(1));
     }
 }

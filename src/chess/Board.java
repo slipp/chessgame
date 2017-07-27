@@ -10,7 +10,11 @@ class Board {
         pawns.add(pawn);
     }
     
-    ArrayList<Pawn> getPawns() {
-        return pawns;
+    int size() {
+        return pawns.size();
+    }
+    
+    Pawn findPawn(int index) {
+        return pawns.get(index);
     }
 }
