@@ -1,39 +1,45 @@
 package pieces;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
+
+import pieces.Piece.Type;
 
 public class PieceTest {
     @Test
     public void create_piece() {
-        verifyPiece(Piece.createWhitePawn(), Piece.WHITE_COLOR, Piece.WHITE_PAWN_REPRESENTATION);
-        verifyPiece(Piece.createBlackPawn(), Piece.BLACK_COLOR, Piece.BLACK_PAWN_REPRESENTATION);
+        verifyPiece(Piece.createWhitePawn(), Piece.createBlackPawn(), Type.PAWN);
+        verifyPiece(Piece.createWhiteKnight(), Piece.createBlackKnight(), Type.KNIGHT);
+        verifyPiece(Piece.createWhiteRook(), Piece.createBlackRook(), Type.ROOK);
+        verifyPiece(Piece.createWhiteBishop(), Piece.createBlackBishop(), Type.BISHOP);
+        verifyPiece(Piece.createWhiteQueen(), Piece.createBlackQueen(), Type.QUEEN);
+        verifyPiece(Piece.createWhiteKing(), Piece.createBlackKing(), Type.KING);
         
-        verifyPiece(Piece.createWhiteKnight(), Piece.WHITE_COLOR, Piece.WHITE_KNIGHT_REPRESENTATION);
-        verifyPiece(Piece.createBlackKnight(), Piece.BLACK_COLOR, Piece.BLACK_KNIGHT_REPRESENTATION);
-        
-        verifyPiece(Piece.createWhiteRook(), Piece.WHITE_COLOR, Piece.WHITE_ROOK_REPRESENTATION);
-        verifyPiece(Piece.createBlackRook(), Piece.BLACK_COLOR, Piece.BLACK_ROOK_REPRESENTATION);
-        
-        verifyPiece(Piece.createWhiteBishop(), Piece.WHITE_COLOR, Piece.WHITE_BISHOP_REPRESENTATION);
-        verifyPiece(Piece.createBlackBishop(), Piece.BLACK_COLOR, Piece.BLACK_BISHOP_REPRESENTATION);
-        
-        verifyPiece(Piece.createWhiteQueen(), Piece.WHITE_COLOR, Piece.WHITE_QUEEN_REPRESENTATION);
-        verifyPiece(Piece.createBlackQueen(), Piece.BLACK_COLOR, Piece.BLACK_QUEEN_REPRESENTATION);
-        
-        verifyPiece(Piece.createWhiteKing(), Piece.WHITE_COLOR, Piece.WHITE_KING_REPRESENTATION);
-        verifyPiece(Piece.createBlackKing(), Piece.BLACK_COLOR, Piece.BLACK_KING_REPRESENTATION);        
+        Piece blank = Piece.createBlank();
+        assertFalse(blank.isWhite());
+        assertFalse(blank.isBlack());
+        assertEquals(Type.NO_PIECE, blank.getType());
     }
     
-    private void verifyPiece(final Piece piece, final String color, final char representation) {
-        assertEquals(color, piece.getColor());
-        assertEquals(representation, piece.getRepresentation());
+    private void verifyPiece(final Piece whitePiece, final Piece blackPiece, final Type type) {
+        assertTrue(whitePiece.isWhite());
+        assertEquals(type, whitePiece.getType());
+        
+        assertTrue(blackPiece.isBlack());
+        assertEquals(type, blackPiece.getType());
     }
     
     @Test
     public void isWhiteAndBlack() throws Exception {
-        assertTrue(Piece.createWhitePawn().isWhite());
-        assertTrue(Piece.createBlackKing().isBlack());
+        Piece whitePawn = Piece.createWhitePawn();
+        assertTrue(whitePawn.isWhite());
+        assertEquals('p', whitePawn.getRepresentation());
+        
+        Piece blackPawn = Piece.createBlackPawn();
+        assertTrue(blackPawn.isBlack());
+        assertEquals('P', blackPawn.getRepresentation());
     }
 }
