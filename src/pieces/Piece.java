@@ -5,8 +5,8 @@ public class Piece {
     public static final String BLACK_COLOR = "black";
     public static final char WHITE_PAWN_REPRESENTATION = 'p';
     public static final char BLACK_PAWN_REPRESENTATION = 'P';
-    public static final char WHITE_KNIGHT_REPRESENTATION = 'k';
-    public static final char BLACK_KNIGHT_REPRESENTATION = 'K';
+    public static final char WHITE_KNIGHT_REPRESENTATION = 'n';
+    public static final char BLACK_KNIGHT_REPRESENTATION = 'N';
     public static final char WHITE_ROOK_REPRESENTATION = 'r';
     public static final char BLACK_ROOK_REPRESENTATION = 'R';
     public static final char WHITE_BISHOP_REPRESENTATION = 'b';
@@ -78,5 +78,13 @@ public class Piece {
     
     public static Piece createBlackKing() {
         return new Piece(BLACK_COLOR, BLACK_KING_REPRESENTATION);
+    }
+
+    public boolean isWhite() {
+        return this.color.equals(WHITE_COLOR);
+    }
+    
+    public boolean isBlack() {
+        return this.color.equals(BLACK_COLOR);
     }
 }

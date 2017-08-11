@@ -1,6 +1,6 @@
 package pieces;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -25,9 +25,15 @@ public class PieceTest {
         verifyPiece(Piece.createWhiteKing(), Piece.WHITE_COLOR, Piece.WHITE_KING_REPRESENTATION);
         verifyPiece(Piece.createBlackKing(), Piece.BLACK_COLOR, Piece.BLACK_KING_REPRESENTATION);        
     }
-
+    
     private void verifyPiece(final Piece piece, final String color, final char representation) {
         assertEquals(color, piece.getColor());
         assertEquals(representation, piece.getRepresentation());
+    }
+    
+    @Test
+    public void isWhiteAndBlack() throws Exception {
+        assertTrue(Piece.createWhitePawn().isWhite());
+        assertTrue(Piece.createBlackKing().isBlack());
     }
 }
