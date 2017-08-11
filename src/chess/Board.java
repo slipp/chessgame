@@ -4,25 +4,25 @@ import static utils.StringUtils.appendNewLine;
 
 import java.util.ArrayList;
 
-import pieces.Pawn;
+import pieces.Piece;
 
 class Board {
-    ArrayList<Pawn> whitePawns = new ArrayList<Pawn>();
-    ArrayList<Pawn> blackPawns = new ArrayList<Pawn>();
+    ArrayList<Piece> whitePawns = new ArrayList<Piece>();
+    ArrayList<Piece> blackPawns = new ArrayList<Piece>();
     
-    void addWhitePawn(Pawn pawn) {
+    void addWhitePawn(Piece pawn) {
         whitePawns.add(pawn);
     }
     
-    void addBlackPawn(Pawn pawn) {
+    void addBlackPawn(Piece pawn) {
         blackPawns.add(pawn);
     }
     
-    Pawn findWhitePawn(int index) {
+    Piece findWhitePawn(int index) {
         return whitePawns.get(index);
     }
     
-    Pawn findBlackPawn(int index) {
+    Piece findBlackPawn(int index) {
         return blackPawns.get(index);
     }
     
@@ -32,11 +32,11 @@ class Board {
 
     void initialize() {
        for(int i = 0; i < 8; i++) {
-           addWhitePawn(new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION));
+           addWhitePawn(Piece.createWhitePawn());
        }
        
        for(int i = 0; i < 8; i++) {
-           addBlackPawn(new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION));
+           addBlackPawn(Piece.createBlackPawn());
        }
     }
 
@@ -48,9 +48,9 @@ class Board {
         return getPawnsResult(blackPawns);
     }
     
-    private String getPawnsResult(ArrayList<Pawn> pawns) {
+    private String getPawnsResult(ArrayList<Piece> pawns) {
         StringBuilder sb = new StringBuilder();
-        for (Pawn pawn : pawns) {
+        for (Piece pawn : pawns) {
             sb.append(pawn.getRepresentation());
         }
         return sb.toString();
