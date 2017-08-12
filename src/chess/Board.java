@@ -12,7 +12,7 @@ import pieces.Piece.Type;
 class Board {
     private ArrayList<Rank> ranks = new ArrayList<>();
     
-    void initialize() {
+    public void initialize() {
         ranks.add(Rank.initializeWhitePieces());
         ranks.add(Rank.initializeWhitePawns());
         ranks.add(Rank.initializeBlankLine());
@@ -21,6 +21,12 @@ class Board {
         ranks.add(Rank.initializeBlankLine());
         ranks.add(Rank.initializeBlackPawns());
         ranks.add(Rank.initializeBlackPieces());
+    }
+    
+    void initializeEmpty() {
+        for (int i = 0; i < 8; i++) {
+            ranks.add(Rank.initializeBlankLine());
+        }
     }
     
     private String showRank(Rank rank) {
@@ -49,10 +55,12 @@ class Board {
     }
 
     public Piece findPiece(String position) {
-        char x = position.charAt(0);
-        int xPos = x - 'a';
-        char y = position.charAt(1);
-        int yPos = Character.getNumericValue(y);
-        return ranks.get(yPos - 1).findPiece(xPos);
+        Position p = new Position(position);
+        return ranks.get(p.getYIndex()).findPiece(p.getXIndex());
+    }
+
+    public void move(String position, Piece piece) {
+        Position p = new Position(position);
+        ranks.get(p.getYIndex()).move(p.getXIndex(), piece);
     }
 }

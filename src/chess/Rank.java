@@ -82,4 +82,8 @@ class Rank {
     Piece findPiece(int xPosition) {
         return pieces.get(xPosition);
     }
+
+    public void move(int xPos, Piece piece) {
+        pieces.set(xPos, piece);
+    }
 }
