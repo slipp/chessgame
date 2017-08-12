@@ -3,6 +3,7 @@ package chess;
 import static utils.StringUtils.appendNewLine;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ListIterator;
 
 import pieces.Piece;
@@ -62,5 +63,22 @@ class Board {
     public void move(String position, Piece piece) {
         Position p = new Position(position);
         ranks.get(p.getYIndex()).move(p.getXIndex(), piece);
+    }
+
+    public double caculcatePoint(Color color) {
+        List<Piece> pieces = findPiecesByColor(color);
+        double point = 0.0;
+        for (Piece piece : pieces) {
+            point += piece.getPoint();
+        }
+        return point;
+    }
+
+    private List<Piece> findPiecesByColor(Color color) {
+        ArrayList<Piece> pieces = new ArrayList<>();
+        for (Rank rank : ranks) {
+            pieces.addAll(rank.findPiecesByColor(color));
+        }
+        return pieces;
     }
 }

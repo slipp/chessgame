@@ -1,22 +1,22 @@
 package chess;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import pieces.Piece;
 import pieces.Piece.Color;
 import pieces.Piece.Type;
 
 class Rank {
-    private ArrayList<Piece> pieces = new ArrayList<>(8);
+    private List<Piece> pieces = new ArrayList<>(8);
     
     void addPiece(Piece piece) {
         pieces.add(piece);
     }
     
-    Collection<Piece> getPieces() {
-        return Collections.unmodifiableCollection(pieces);
+    List<Piece> getPieces() {
+        return Collections.unmodifiableList(pieces);
     }
 
     int countPieceByColorAndType(Color color, Type type) {
@@ -85,5 +85,13 @@ class Rank {
 
     public void move(int xPos, Piece piece) {
         pieces.set(xPos, piece);
+    }
+
+    public List<Piece> findPiecesByColor(Color color) {
+        List<Piece> piecesByColor = new ArrayList<>();
+        for (Piece piece : pieces) {
+            piece.addPiecesByColor(color, piecesByColor);
+        }
+        return Collections.unmodifiableList(piecesByColor);
     }
 }

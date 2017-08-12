@@ -62,9 +62,30 @@ public class BoardTest {
         
         String position = "b5";
         Piece piece = Piece.createBlackRook();
-        board.move(position, Piece.createBlackRook());
+        board.move(position, piece);
         
         assertEquals(piece, board.findPiece(position));
+        System.out.println(board.showBoard());
+    }
+    
+    @Test
+    public void caculcatePoint() throws Exception {
+        board.initializeEmpty();
+        
+        board.move("b6", Piece.createBlackPawn());
+        board.move("e6", Piece.createBlackQueen());
+        board.move("b8", Piece.createBlackKing());
+        board.move("c8", Piece.createBlackRook());
+        
+        
+        board.move("f2", Piece.createWhitePawn());
+        board.move("g2", Piece.createWhitePawn());
+        board.move("e1", Piece.createWhiteRook());
+        board.move("f1", Piece.createWhiteKing());
+         
+        assertEquals(15.0, board.caculcatePoint(Color.BLACK), 0.01);
+        assertEquals(7.0, board.caculcatePoint(Color.WHITE), 0.01);
+        
         System.out.println(board.showBoard());
     }
 }
