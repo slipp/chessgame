@@ -44,18 +44,25 @@ public class Piece {
     private Color color;
     
     private Type type;
+
+    private Position position;
     
-    private Piece(Color color, Type type) {
+    private Piece(Color color, Type type, Position position) {
         this.color = color;
         this.type = type;
+        this.position = position;
     }
 
-    public Color getColor() {
+    Color getColor() {
         return color;
     }
     
-    public Type getType() {
+    Type getType() {
         return type;
+    }
+    
+    public Position getPosition() {
+        return position;
     }
     
     public char getRepresentation() {
@@ -88,68 +95,79 @@ public class Piece {
         }
     }
     
-    public double getPoint() {
+    public double getPoint(List<Piece> pieces) {
+        if (!matchType(Type.PAWN)) {
+            return this.type.getDefaultPoint();
+        }
+        
+        List<Position> columnNeighbors = this.position.getColumnNeighbors();
+        for (Position position : columnNeighbors) {
+            if (pieces.contains(new Piece(this.color, this.type, position))) {
+                return this.type.getDefaultPoint() - 0.5;
+            }
+        }
+        
         return this.type.getDefaultPoint();
     }
     
-    private static Piece createWhite(Type type) {
-        return new Piece(Color.WHITE, type);
+    private static Piece createWhite(Type type, Position position) {
+        return new Piece(Color.WHITE, type, position);
     }
     
-    private static Piece createBlack(Type type) {
-        return new Piece(Color.BLACK, type);
+    private static Piece createBlack(Type type, Position position) {
+        return new Piece(Color.BLACK, type, position);
     }
     
-    public static Piece createWhitePawn() {
-        return createWhite(Type.PAWN);
+    public static Piece createWhitePawn(Position position) {
+        return createWhite(Type.PAWN, position);
     }
 
-    public static Piece createBlackPawn() {
-        return createBlack(Type.PAWN);
+    public static Piece createBlackPawn(Position position) {
+        return createBlack(Type.PAWN, position);
     }
 
-    public static Piece createWhiteKnight() {
-        return createWhite(Type.KNIGHT);
+    public static Piece createWhiteKnight(Position position) {
+        return createWhite(Type.KNIGHT, position);
     }
     
-    public static Piece createBlackKnight() {
-        return createBlack(Type.KNIGHT);
+    public static Piece createBlackKnight(Position position) {
+        return createBlack(Type.KNIGHT, position);
     }
 
-    public static Piece createWhiteRook() {
-        return createWhite(Type.ROOK);
+    public static Piece createWhiteRook(Position position) {
+        return createWhite(Type.ROOK, position);
     }
 
-    public static Piece createBlackRook() {
-        return createBlack(Type.ROOK);
+    public static Piece createBlackRook(Position position) {
+        return createBlack(Type.ROOK, position);
     }
 
-    public static Piece createWhiteBishop() {
-        return createWhite(Type.BISHOP);
+    public static Piece createWhiteBishop(Position position) {
+        return createWhite(Type.BISHOP, position);
     }
 
-    public static Piece createBlackBishop() {
-        return createBlack(Type.BISHOP);
+    public static Piece createBlackBishop(Position position) {
+        return createBlack(Type.BISHOP, position);
     }
 
-    public static Piece createWhiteQueen() {
-        return createWhite(Type.QUEEN);
+    public static Piece createWhiteQueen(Position position) {
+        return createWhite(Type.QUEEN, position);
     }
     
-    public static Piece createBlackQueen() {
-        return createBlack(Type.QUEEN);
+    public static Piece createBlackQueen(Position position) {
+        return createBlack(Type.QUEEN, position);
     }
 
-    public static Piece createWhiteKing() {
-        return createWhite(Type.KING);
+    public static Piece createWhiteKing(Position position) {
+        return createWhite(Type.KING, position);
     }
     
-    public static Piece createBlackKing() {
-        return createBlack(Type.KING);
+    public static Piece createBlackKing(Position position) {
+        return createBlack(Type.KING, position);
     }
     
-    public static Piece createBlank() {
-        return new Piece(Color.NOCOLOR, Type.NO_PIECE);
+    public static Piece createBlank(Position position) {
+        return new Piece(Color.NOCOLOR, Type.NO_PIECE, position);
     }
 
     @Override
@@ -157,6 +175,7 @@ public class Piece {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((color == null) ? 0 : color.hashCode());
+        result = prime * result + ((position == null) ? 0 : position.hashCode());
         result = prime * result + ((type == null) ? 0 : type.hashCode());
         return result;
     }
@@ -172,6 +191,11 @@ public class Piece {
         Piece other = (Piece) obj;
         if (color != other.color)
             return false;
+        if (position == null) {
+            if (other.position != null)
+                return false;
+        } else if (!position.equals(other.position))
+            return false;
         if (type != other.type)
             return false;
         return true;
@@ -179,6 +203,6 @@ public class Piece {
 
     @Override
     public String toString() {
-        return "Piece [color=" + color + ", type=" + type + "]";
+        return "Piece [color=" + color + ", type=" + type + ", position=" + position + "]";
     }
 }

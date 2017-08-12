@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import pieces.Piece;
+import pieces.Position;
 import pieces.Piece.Color;
 import pieces.Piece.Type;
 
@@ -14,19 +15,19 @@ class Board {
     private ArrayList<Rank> ranks = new ArrayList<>();
     
     public void initialize() {
-        ranks.add(Rank.initializeWhitePieces());
-        ranks.add(Rank.initializeWhitePawns());
-        ranks.add(Rank.initializeBlankLine());
-        ranks.add(Rank.initializeBlankLine());
-        ranks.add(Rank.initializeBlankLine());
-        ranks.add(Rank.initializeBlankLine());
-        ranks.add(Rank.initializeBlackPawns());
-        ranks.add(Rank.initializeBlackPieces());
+        ranks.add(Rank.initializeWhitePieces(0));
+        ranks.add(Rank.initializeWhitePawns(1));
+        ranks.add(Rank.initializeBlankLine(2));
+        ranks.add(Rank.initializeBlankLine(3));
+        ranks.add(Rank.initializeBlankLine(4));
+        ranks.add(Rank.initializeBlankLine(5));
+        ranks.add(Rank.initializeBlackPawns(6));
+        ranks.add(Rank.initializeBlackPieces(7));
     }
     
     void initializeEmpty() {
         for (int i = 0; i < 8; i++) {
-            ranks.add(Rank.initializeBlankLine());
+            ranks.add(Rank.initializeBlankLine(i));
         }
     }
     
@@ -61,7 +62,10 @@ class Board {
     }
 
     public void move(String position, Piece piece) {
-        Position p = new Position(position);
+        move(new Position(position), piece);
+    }
+    
+    public void move(Position p, Piece piece) {
         ranks.get(p.getYIndex()).move(p.getXIndex(), piece);
     }
 
@@ -69,8 +73,9 @@ class Board {
         List<Piece> pieces = findPiecesByColor(color);
         double point = 0.0;
         for (Piece piece : pieces) {
-            point += piece.getPoint();
+            point += piece.getPoint(pieces);
         }
+        
         return point;
     }
 
