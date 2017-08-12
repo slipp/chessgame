@@ -1,5 +1,9 @@
 package pieces;
 
+/**
+ * @author javajigi
+ *
+ */
 public class Piece {
     public enum Color {
         WHITE, BLACK, NOCOLOR;
@@ -24,6 +28,7 @@ public class Piece {
     }    
     
     private Color color;
+    
     private Type type;
     
     private Piece(Color color, Type type) {
@@ -41,6 +46,26 @@ public class Piece {
     
     public char getRepresentation() {
         return isWhite() ? this.type.getWhiteRepresentation() : this.type.getBlackRepresentation();
+    }
+    
+    public boolean isWhite() {
+        return matchColor(Color.WHITE);
+    }
+    
+    public boolean isBlack() {
+        return matchColor(Color.BLACK);
+    }
+    
+    public boolean matchColorAndType(Color color, Type type) {
+        return matchColor(color) && matchType(type);
+    }
+    
+    private boolean matchColor(Color color) {
+        return this.color == color;
+    }
+
+    private boolean matchType(Type type) {
+        return this.type == type;
     }
     
     private static Piece createWhite(Type type) {
@@ -103,11 +128,33 @@ public class Piece {
         return new Piece(Color.NOCOLOR, Type.NO_PIECE);
     }
 
-    public boolean isWhite() {
-        return this.color == Color.WHITE;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((color == null) ? 0 : color.hashCode());
+        result = prime * result + ((type == null) ? 0 : type.hashCode());
+        return result;
     }
-    
-    public boolean isBlack() {
-        return this.color == Color.BLACK;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Piece other = (Piece) obj;
+        if (color != other.color)
+            return false;
+        if (type != other.type)
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Piece [color=" + color + ", type=" + type + "]";
     }
 }

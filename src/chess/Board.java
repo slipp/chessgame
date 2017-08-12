@@ -3,86 +3,29 @@ package chess;
 import static utils.StringUtils.appendNewLine;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import pieces.Piece;
+import pieces.Piece.Color;
+import pieces.Piece.Type;
 
 class Board {
-    private static int pieceCount = 0;
+    private ArrayList<Rank> ranks = new ArrayList<>();
     
-    ArrayList<ArrayList<Piece>> pieces = new ArrayList<>();
-    
-    int pieceCount() {
-        return pieceCount;
-    }
-    
-    private ArrayList<Piece> initializeWhitePieces() {
-        ArrayList<Piece> whitePieces = new ArrayList<Piece>();
-        whitePieces.add(Piece.createWhiteRook());
-        whitePieces.add(Piece.createWhiteKnight());
-        whitePieces.add(Piece.createWhiteBishop());
-        whitePieces.add(Piece.createWhiteQueen());
-        whitePieces.add(Piece.createWhiteKing());
-        whitePieces.add(Piece.createWhiteBishop());
-        whitePieces.add(Piece.createWhiteKnight());
-        whitePieces.add(Piece.createWhiteRook());
-        pieceCount += 8;
-        return whitePieces;
-    }
-    
-    private ArrayList<Piece> initializeBlackPieces() {
-        ArrayList<Piece> blackPieces = new ArrayList<Piece>();
-        blackPieces.add(Piece.createBlackRook());
-        blackPieces.add(Piece.createBlackKnight());
-        blackPieces.add(Piece.createBlackBishop());
-        blackPieces.add(Piece.createBlackQueen());
-        blackPieces.add(Piece.createBlackKing());
-        blackPieces.add(Piece.createBlackBishop());
-        blackPieces.add(Piece.createBlackKnight());
-        blackPieces.add(Piece.createBlackRook());
-        pieceCount += 8;
-        return blackPieces;
-    }
-    
-    private ArrayList<Piece> initializeWhitePawns() {
-        ArrayList<Piece> whitePawns = new ArrayList<Piece>();
-        for(int i = 0; i < 8; i++) {
-            whitePawns.add(Piece.createWhitePawn());
-            pieceCount++;
-        }
-        return whitePawns;
-    }
-    
-    private ArrayList<Piece> initializeBlackPawns() {
-        ArrayList<Piece> blackPawns = new ArrayList<Piece>();
-        for(int i = 0; i < 8; i++) {
-            blackPawns.add(Piece.createBlackPawn());
-            pieceCount++;
-        }
-        return blackPawns;
-    }
-    
-    private ArrayList<Piece> initializeBlankLine() {
-        ArrayList<Piece> blankLines = new ArrayList<Piece>();
-        for(int i = 0; i < 8; i++) {
-            blankLines.add(Piece.createBlank());
-        }
-        return blankLines;
-    }
-
     void initialize() {
-       pieces.add(initializeBlackPieces());
-       pieces.add(initializeBlackPawns());
-       pieces.add(initializeBlankLine());
-       pieces.add(initializeBlankLine());
-       pieces.add(initializeBlankLine());
-       pieces.add(initializeBlankLine());
-       pieces.add(initializeWhitePawns());
-       pieces.add(initializeWhitePieces());
+        ranks.add(Rank.initializeWhitePieces());
+        ranks.add(Rank.initializeWhitePawns());
+        ranks.add(Rank.initializeBlankLine());
+        ranks.add(Rank.initializeBlankLine());
+        ranks.add(Rank.initializeBlankLine());
+        ranks.add(Rank.initializeBlankLine());
+        ranks.add(Rank.initializeBlackPawns());
+        ranks.add(Rank.initializeBlackPieces());
     }
     
-    private String showRank(ArrayList<Piece> rank) {
+    private String showRank(Rank rank) {
         StringBuilder sb = new StringBuilder();
-        for (Piece piece : rank) {
+        for (Piece piece : rank.getPieces()) {
             sb.append(piece.getRepresentation());
         }
         return appendNewLine(sb.toString());
@@ -90,9 +33,26 @@ class Board {
 
     String showBoard() {
         StringBuilder sb = new StringBuilder();
-        for (ArrayList<Piece> rank : pieces) {
-            sb.append(showRank(rank));
+        ListIterator<Rank> rankIter = ranks.listIterator(ranks.size());
+        while (rankIter.hasPrevious()) {
+            sb.append(showRank(rankIter.previous()));
         }
         return sb.toString();
+    }
+
+    public int countPieceByColorAndType(Color color, Type type) {
+        int countPiece = 0;
+        for (Rank rank : ranks) {
+            countPiece += rank.countPieceByColorAndType(color, type);
+        }
+        return countPiece;
+    }
+
+    public Piece findPiece(String position) {
+        char x = position.charAt(0);
+        int xPos = x - 'a';
+        char y = position.charAt(1);
+        int yPos = Character.getNumericValue(y);
+        return ranks.get(yPos - 1).findPiece(xPos);
     }
 }

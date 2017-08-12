@@ -1,10 +1,14 @@
 package chess;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static utils.StringUtils.appendNewLine;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import pieces.Piece;
+import pieces.Piece.Color;
+import pieces.Piece.Type;
 
 public class BoardTest {
     private Board board;
@@ -17,7 +21,6 @@ public class BoardTest {
     @Test
     public void create() throws Exception {
         board.initialize();
-        assertEquals(32, board.pieceCount());
         String blankRank = appendNewLine("........");
         assertEquals(
             appendNewLine("RNBQKBNR") +
@@ -32,5 +35,24 @@ public class BoardTest {
     public void print() throws Exception {
         board.initialize();
         System.out.println(board.showBoard());
+    }
+    
+    @Test
+    public void countPieceByColorAndType() throws Exception {
+        board.initialize();
+        
+        assertEquals(8, board.countPieceByColorAndType(Color.WHITE, Type.PAWN));
+        assertEquals(2, board.countPieceByColorAndType(Color.BLACK, Type.KNIGHT));
+        assertEquals(1, board.countPieceByColorAndType(Color.BLACK, Type.KING));
+    }
+    
+    @Test
+    public void findPiece() throws Exception {
+        board.initialize();
+        
+        assertEquals(Piece.createBlackRook(), board.findPiece("a8"));
+        assertEquals(Piece.createBlackRook(), board.findPiece("h8"));
+        assertEquals(Piece.createWhiteRook(), board.findPiece("a1"));
+        assertEquals(Piece.createWhiteRook(), board.findPiece("h1"));
     }
 }
