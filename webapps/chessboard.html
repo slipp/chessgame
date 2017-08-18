@@ -12,126 +12,156 @@
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 <style type="text/css">
-.chessboard {
-	width: 690px;
-	height: 690px;
-	margin: 20px;
-	border: 25px solid #333;
+a {
+	color: #000;
+	display: block;
+	font-size: 60px;
+	height: 80px;
+	position: relative;
+	text-decoration: none;
+	text-shadow: 0 1px #fff;
+	width: 80px;
 }
 
-.black {
-	float: left;
-	width: 80px;
-	height: 80px;
-	background-color: #999;
-	font-size: 50px;
-	text-align: center;
-	display: table-cell;
-	vertical-align: middle;
+#boards {
+	border: 5px solid #333;
 }
 
-.white {
-	float: left;
-	width: 80px;
+#boards td {
+	background: #fff;
+	background: -moz-linear-gradient(top, #fff, #eee);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
+	box-shadow: inset 0 0 0 1px #fff;
+	-moz-box-shadow: inset 0 0 0 1px #fff;
+	-webkit-box-shadow: inset 0 0 0 1px #fff;
 	height: 80px;
-	background-color: #fff;
-	font-size: 50px;
 	text-align: center;
-	display: table-cell;
 	vertical-align: middle;
+	width: 80px;
+}
+
+#boards tr:nth-child(odd) td:nth-child(even), #boards tr:nth-child(even) td:nth-child(odd)
+	{
+	background: #ccc;
+	background: -moz-linear-gradient(top, #ccc, #eee);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#ccc), to(#eee));
+	box-shadow: inset 0 0 10px rgba(0, 0, 0, .4);
+	-moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, .4);
+	-webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, .4);
 }
 </style>
 </head>
 <body>
 	<div class="container">
-		<div class="row center-block">
-			<div class="chessboard">
-				<!-- 1st -->
-				<div id="a8" class="white">&#9820;</div>
-				<div id="b8" class="black">&#9822;</div>
-				<div id="c8" class="white">&#9821;</div>
-				<div id="d8" class="black">&#9819;</div>
-				<div id="e8" class="white">&#9818;</div>
-				<div id="f8" class="black">&#9821;</div>
-				<div id="g8" class="white">&#9822;</div>
-				<div id="h8" class="black">&#9820;</div>
-
-				<!-- 2nd -->
-				<div id="a7" class="black">&#9821;</div>
-				<div id="b7" class="white">&#9821;</div>
-				<div id="c7" class="black">&#9821;</div>
-				<div id="d7" class="white">&#9821;</div>
-				<div id="e7" class="black">&#9821;</div>
-				<div id="f7" class="white">&#9821;</div>
-				<div id="g7" class="black">&#9821;</div>
-				<div id="h7" class="white">&#9821;</div>
-				<!-- 3th -->
-				<div id="a6" class="white"></div>
-				<div id="b6" class="black"></div>
-				<div id="c6" class="white"></div>
-				<div id="d6" class="black"></div>
-				<div id="e6" class="white"></div>
-				<div id="f6" class="black"></div>
-				<div id="g6" class="white"></div>
-				<div id="h6" class="black"></div>
-				<!-- 4st -->
-				<div id="a5" class="black"></div>
-				<div id="b5" class="white"></div>
-				<div id="c5" class="black"></div>
-				<div id="d5" class="white"></div>
-				<div id="e5" class="black"></div>
-				<div id="f5" class="white"></div>
-				<div id="g5" class="black"></div>
-				<div id="h5" class="white"></div>
-				<!-- 5th -->
-				<div id="a4" class="white"></div>
-				<div id="b4" class="black"></div>
-				<div id="c4" class="white"></div>
-				<div id="d4" class="black"></div>
-				<div id="e4" class="white"></div>
-				<div id="f4" class="black"></div>
-				<div id="g4" class="white"></div>
-				<div id="h4" class="black"></div>
-				<!-- 6th -->
-				<div id="a3" class="black"></div>
-				<div id="b3" class="white"></div>
-				<div id="c3" class="black"></div>
-				<div id="d3" class="white"></div>
-				<div id="e3" class="black"></div>
-				<div id="f3" class="white"></div>
-				<div id="g3" class="black"></div>
-				<div id="h3" class="white"></div>
-				<!-- 7th -->
-				<div id="a2" class="white">&#9817;</div>
-				<div id="b2" class="black">&#9817;</div>
-				<div id="c2" class="white">&#9817;</div>
-				<div id="d2" class="black">&#9817;</div>
-				<div id="e2" class="white">&#9817;</div>
-				<div id="f2" class="black">&#9817;</div>
-				<div id="g2" class="white">&#9817;</div>
-				<div id="h2" class="black">&#9817;</div>
-				<!-- 8th -->
-				<div id="a1" class="black">&#9814;</div>
-				<div id="b1" class="white">&#9816;</div>
-				<div id="c1" class="black">&#9815;</div>
-				<div id="d1" class="white">&#9813;</div>
-				<div id="e1" class="black">&#9812;</div>
-				<div id="f1" class="white">&#9815;</div>
-				<div id="g1" class="black">&#9816;</div>
-				<div id="h1" class="white">&#9814;</div>
+		<div class="row center-block"> 
+			<div class="col-md-8">
+			<h1>내가 구현한 체스 게임</h1>
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col-md-4">
+		<div class="row center-block">
+			<div class="col-md-8">
+			<table id="boards" cellpadding="0" cellspacing="0">
+				<tbody>
+					<tr>
+						<td id="a8"><a href="#">♜</a></td>
+						<td id="b8"><a href="#">♞</a></td>
+						<td id="c8"><a href="#">♝</a></td>
+						<td id="d8"><a href="#">♛</a></td>
+						<td id="e8"><a href="#">♚</a></td>
+						<td id="f8"><a href="#">♝</a></td>
+						<td id="g8"><a href="#">♞</a></td>
+						<td id="h8"><a href="#">♜</a></td>
+		
+					</tr>
+					<tr>
+						<td id="a7"><a href="#">♟</a></td>
+						<td id="b7"><a href="#">♟</a></td>
+						<td id="c7"><a href="#">♟</a></td>
+						<td id="d7"><a href="#">♟</a></td>
+						<td id="e7"><a href="#">♟</a></td>
+						<td id="f7"><a href="#">♟</a></td>
+						<td id="g7"><a href="#">♟</a></td>
+						<td id="h7"><a href="#">♟</a></td>
+		
+					</tr>
+					<tr>
+						<td id="a6"><a href="#"></a></td>
+						<td id="b6"><a href="#"></a></td>
+						<td id="c6"><a href="#"></a></td>
+						<td id="d6"><a href="#"></a></td>
+						<td id="e6"><a href="#"></a></td>
+						<td id="f6"><a href="#"></a></td>
+						<td id="g6"><a href="#"></a></td>
+						<td id="h6"><a href="#"></a></td>
+		
+					</tr>
+					<tr>
+						<td id="a5"><a href="#"></a></td>
+						<td id="b5"><a href="#"></a></td>
+						<td id="c5"><a href="#"></a></td>
+						<td id="d5"><a href="#"></a></td>
+						<td id="e5"><a href="#"></a></td>
+						<td id="f5"><a href="#"></a></td>
+						<td id="g5"><a href="#"></a></td>
+						<td id="h5"><a href="#"></a></td>
+		
+					</tr>
+					<tr>
+						<td id="a4"><a href="#"></a></td>
+						<td id="b4"><a href="#"></a></td>
+						<td id="c4"><a href="#"></a></td>
+						<td id="d4"><a href="#"></a></td>
+						<td id="e4"><a href="#"></a></td>
+						<td id="f4"><a href="#"></a></td>
+						<td id="g4"><a href="#"></a></td>
+						<td id="h4"><a href="#"></a></td>
+		
+					</tr>
+					<tr>
+						<td id="a3"><a href="#"></a></td>
+						<td id="b3"><a href="#"></a></td>
+						<td id="c3"><a href="#"></a></td>
+						<td id="d3"><a href="#"></a></td>
+						<td id="e3"><a href="#"></a></td>
+						<td id="f3"><a href="#"></a></td>
+						<td id="g3"><a href="#"></a></td>
+						<td id="h3"><a href="#"></a></td>
+		
+					</tr>
+					<tr>
+						<td id="a2"><a href="#">♙</a></td>
+						<td id="b2"><a href="#">♙</a></td>
+						<td id="c2"><a href="#">♙</a></td>
+						<td id="d2"><a href="#">♙</a></td>
+						<td id="e2"><a href="#">♙</a></td>
+						<td id="f2"><a href="#">♙</a></td>
+						<td id="g2"><a href="#">♙</a></td>
+						<td id="h2"><a href="#">♙</a></td>
+		
+					</tr>
+					<tr>
+						<td id="a1"><a href="#">♖</a></td>
+						<td id="b1"><a href="#">♘</a></td>
+						<td id="c1"><a href="#">♗</a></td>
+						<td id="d1"><a href="#">♕</a></td>
+						<td id="e1"><a href="#">♔</a></td>
+						<td id="f1"><a href="#">♗</a></td>
+						<td id="g1"><a href="#">♘</a></td>
+						<td id="h1"><a href="#">♖</a></td>
+		
+					</tr>
+				</tbody>
+			</table>
+			</div>
+			<div class="col-md-2">
+				<h1><span class="label label-default">백이 둘 차례</span></h1>
+				<br />
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">&#9819; : 흑 점수</h3>
 					</div>
 					<div class="panel-body">35</div>
 				</div>
-			</div>
-			<div class="col-md-4">
 				<div class="panel panel-danger">
 					<div class="panel-heading">
 						<h3 class="panel-title">&#9813; : 백 점수</h3>

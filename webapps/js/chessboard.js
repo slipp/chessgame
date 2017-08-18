@@ -2,7 +2,7 @@ $(function(){
 	var index = 0;
 	var source;
 
-    $('.chessboard div').click(function() {
+    $('#boards tr td').click(function() {
       	var position = $(this).attr('id');
       	var value = index % 2;
       	
