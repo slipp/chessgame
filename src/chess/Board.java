@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.ListIterator;
 
 import pieces.Piece;
-import pieces.Position;
 import pieces.Piece.Color;
 import pieces.Piece.Type;
+import pieces.Position;
 
 class Board {
     private ArrayList<Rank> ranks = new ArrayList<>();
@@ -57,16 +57,30 @@ class Board {
     }
 
     public Piece findPiece(String position) {
-        Position p = new Position(position);
+        return findPiece(new Position(position));
+    }
+    
+    private Piece findPiece(Position p) {
         return ranks.get(p.getYIndex()).findPiece(p.getXIndex());
     }
 
-    public void move(String position, Piece piece) {
-        move(new Position(position), piece);
+    public void addPiece(String target, Piece piece) {
+        addPiece(new Position(target), piece);
     }
     
-    public void move(Position p, Piece piece) {
-        ranks.get(p.getYIndex()).move(p.getXIndex(), piece);
+    public void addPiece(Position target, Piece piece) {
+        piece.move(target);
+        ranks.get(target.getYIndex()).move(target.getXIndex(), piece);
+    }
+    
+    public void move(String source, String target) {
+        move(new Position(source), new Position(target));
+    }
+
+    private void move(Position source, Position target) {
+        Piece piece = findPiece(source);
+        addPiece(source, Piece.createBlank(source));
+        addPiece(target, piece);
     }
 
     public double caculcatePoint(Color color) {

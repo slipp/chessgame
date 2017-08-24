@@ -7,9 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pieces.Piece;
-import pieces.Position;
 import pieces.Piece.Color;
 import pieces.Piece.Type;
+import pieces.Position;
 
 public class BoardTest {
     private Board board;
@@ -23,8 +23,14 @@ public class BoardTest {
     public void create() throws Exception {
         board.initialize();
         String blankRank = appendNewLine("........");
-        assertEquals(appendNewLine("RNBQKBNR") + appendNewLine("PPPPPPPP") + blankRank + blankRank + blankRank
-                + blankRank + appendNewLine("pppppppp") + appendNewLine("rnbqkbnr"), board.showBoard());
+        assertEquals(appendNewLine("RNBQKBNR") + 
+                appendNewLine("PPPPPPPP") + 
+                blankRank + 
+                blankRank + 
+                blankRank + 
+                blankRank + 
+                appendNewLine("pppppppp") + 
+                appendNewLine("rnbqkbnr"), board.showBoard());
     }
 
     @Test
@@ -53,12 +59,12 @@ public class BoardTest {
     }
 
     @Test
-    public void move() throws Exception {
+    public void addPiece() throws Exception {
         board.initializeEmpty();
 
         String position = "b5";
         Piece piece = Piece.createBlackRook(new Position(position));
-        board.move(position, piece);
+        board.addPiece(position, piece);
 
         assertEquals(piece, board.findPiece(position));
         System.out.println(board.showBoard());
@@ -95,7 +101,18 @@ public class BoardTest {
         assertEquals(1.5, board.caculcatePoint(Color.BLACK), 0.01);
     }
     
+    @Test
+    public void move() throws Exception {
+        board.initialize();
+        
+        String sourcePosition = "b2";
+        String targetPosition = "b3";
+        board.move(sourcePosition, targetPosition);
+        assertEquals(Piece.createBlank(new Position(sourcePosition)), board.findPiece(sourcePosition));
+        assertEquals(Piece.createWhitePawn(new Position(targetPosition)), board.findPiece(targetPosition));
+    }
+    
     private void addPiece(Piece piece) {
-        board.move(piece.getPosition(), piece);
+        board.addPiece(piece.getPosition(), piece);
     }
 }

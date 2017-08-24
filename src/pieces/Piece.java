@@ -110,6 +110,10 @@ public class Piece {
         return this.type.getDefaultPoint();
     }
     
+    public void move(Position target) {
+        this.position = target;
+    }
+    
     private static Piece createWhite(Type type, Position position) {
         return new Piece(Color.WHITE, type, position);
     }
