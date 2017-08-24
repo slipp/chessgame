@@ -9,14 +9,14 @@ import pieces.Position;
 import pieces.Piece.Color;
 import pieces.Piece.Type;
 
-class Rank {
+public class Rank {
     private List<Piece> pieces = new ArrayList<>(8);
     
     void addPiece(Piece piece) {
         pieces.add(piece);
     }
     
-    List<Piece> getPieces() {
+    public List<Piece> getPieces() {
         return Collections.unmodifiableList(pieces);
     }
 
@@ -84,11 +84,11 @@ class Rank {
         return pieces.get(xPosition);
     }
 
-    public void move(int xPos, Piece piece) {
+    void move(int xPos, Piece piece) {
         pieces.set(xPos, piece);
     }
 
-    public List<Piece> findPiecesByColor(Color color) {
+    List<Piece> findPiecesByColor(Color color) {
         List<Piece> piecesByColor = new ArrayList<>();
         for (Piece piece : pieces) {
             piece.addPiecesByColor(color, piecesByColor);

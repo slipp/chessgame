@@ -2,10 +2,6 @@ package pieces;
 
 import java.util.List;
 
-/**
- * @author javajigi
- *
- */
 public class Piece {
     public enum Color {
         WHITE, BLACK, NOCOLOR;
