@@ -39,18 +39,23 @@ public class Board {
     }
 
     Piece findPiece(Position p) {
-        return ranks.get(p.getYIndex()).findPiece(p.getXIndex());
-    }
-
-    void replacePiece(Position target, Piece piece) {
-        piece.move(target);
-        ranks.get(target.getYIndex()).move(target.getXIndex(), piece);
+        return ranks.get(p.getY()).findPiece(p.getX());
     }
     
+    private Rank findRank(Position position) {
+        return ranks.get(position.getY());
+    }
+    
+    void replacePiece(Piece piece) {
+        Position target = piece.getPosition();
+        findRank(target).move(target.getX(), piece);
+    }
+
     void move(Position source, Position target) {
         Piece piece = findPiece(source);
-        replacePiece(source, Blank.create(source));
-        replacePiece(target, piece);
+        replacePiece(Blank.create(source));
+        piece.move(target);
+        replacePiece(piece);
     }
 
     double caculcatePoint(Color color) {

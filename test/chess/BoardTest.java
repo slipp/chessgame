@@ -76,7 +76,7 @@ public class BoardTest {
 
         Position position = new Position("b5");
         Rook piece = Rook.createBlack(position);
-        board.replacePiece(position, piece);
+        board.replacePiece(piece);
 
         assertEquals(piece, board.findPiece(position));
         System.out.println(chessView.view(board));
@@ -125,6 +125,6 @@ public class BoardTest {
     }
     
     private void addPiece(Piece piece) {
-        board.replacePiece(piece.getPosition(), piece);
+        board.replacePiece(piece);
     }
 }

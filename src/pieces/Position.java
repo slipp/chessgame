@@ -8,35 +8,35 @@ public class Position {
     private int y;
     
     public Position(String position) {
-        this.x = position.charAt(0) - 'a' + 1;
-        this.y = Character.getNumericValue(position.charAt(1));
+        this.x = position.charAt(0) - 'a';
+        this.y = Character.getNumericValue(position.charAt(1)) - 1;
     }
     
-    public Position(int xIndex, int yIndex) {
-        this.x = xIndex + 1;
-        this.y = yIndex + 1;
+    public Position(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    int getX() {
+    public int getX() {
         return x;
     }
     
-    int getY() {
+    public int getY() {
         return y;
     }
-
-    public int getXIndex() {
-        return x -1 ;
-    }
     
-    public int getYIndex() {
-        return y -1 ;
+    public Position movePosition(Direction direction) {
+        return new Position(x + direction.getXDegree(), y + direction.getYDegree());
     }
     
     public List<Position> getColumnNeighbors() {
         return Arrays.asList(
-                new Position(getXIndex(), getYIndex() - 1), 
-                new Position(getXIndex(), getYIndex() + 1));
+                new Position(getX(), getY() - 1), 
+                new Position(getX(), getY() + 1));
+    }
+    
+    public Direction direction(Position target) {
+        return Direction.valueOf(target.x - this.x, target.y - this.y);
     }
 
     @Override

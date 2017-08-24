@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.List;
+
 public class Knight extends Piece {
     private Knight(Color color, Position position) {
         super(color, Type.KNIGHT, position);
@@ -15,6 +17,10 @@ public class Knight extends Piece {
 
     @Override
     public void verifyMovePosition(Position target) {
-        
+        List<Direction> directions = Direction.knightDirection();
+        Direction direction = getPosition().direction(target);
+        if (!directions.contains(direction)) {
+            throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
+        } 
     }
 }

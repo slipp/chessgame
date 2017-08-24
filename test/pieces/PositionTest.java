@@ -4,16 +4,19 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import pieces.Position;
-
 public class PositionTest {
     @Test
     public void create() {
         Position position = new Position("a1");
-        assertEquals(1, position.getX());
-        assertEquals(1, position.getY());
+        assertEquals(0, position.getX());
+        assertEquals(0, position.getY());
+    }
+    
+    @Test
+    public void direction() throws Exception {
+        Position source = new Position("a1");
+        Position target = new Position("a2");
         
-        assertEquals(0, position.getXIndex());
-        assertEquals(0, position.getYIndex());        
+        assertEquals(Direction.NORTH, source.direction(target));
     }
 }

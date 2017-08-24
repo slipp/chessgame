@@ -38,6 +38,17 @@ public enum Direction {
 		return yDegree;
 	}
 	
+	public static Direction valueOf(int x, int y) {
+	    Direction[] directions = values();
+	    for (Direction direction : directions) {
+            if (x == direction.xDegree && y == direction.yDegree) {
+                return direction;
+            }
+        }
+	    
+        throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
+    }
+	
 	public static List<Direction> linearDirection() {
 		return Arrays.asList(NORTH, EAST, SOUTH, WEST);
 	}
