@@ -1,5 +1,8 @@
 package pieces;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum Direction {
 	NORTH(0, 1),
 	NORTHEAST(1, 1),
@@ -35,19 +38,19 @@ public enum Direction {
 		return yDegree;
 	}
 	
-	public static Direction[] linearDirection() {
-		return new Direction[] { NORTH, EAST, SOUTH, WEST };
+	public static List<Direction> linearDirection() {
+		return Arrays.asList(NORTH, EAST, SOUTH, WEST);
 	}
 
-	public static Direction[] diagonalDirection() {
-		return new Direction[] { NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHWEST };
+	public static List<Direction> diagonalDirection() {
+		return Arrays.asList(NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHWEST);
 	}
 	
-	public static Direction[] everyDirection() {
-		return new Direction[] { NORTH, EAST, SOUTH, WEST, NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHWEST };
+	public static List<Direction> everyDirection() {
+		return Arrays.asList(NORTH, EAST, SOUTH, WEST, NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHWEST);
 	}
 	
-	public static Direction[] knightDirection() {
-		return new Direction[] { NNE, NNW, SSE, SSW, EEN, EES, WWN, WWS };
+	public static List<Direction> knightDirection() {
+		return Arrays.asList(NNE, NNW, SSE, SSW, EEN, EES, WWN, WWS);
 	}
 }
