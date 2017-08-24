@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import pieces.Blank;
 import pieces.Piece;
 import pieces.Piece.Color;
 import pieces.Piece.Type;
@@ -48,7 +49,7 @@ public class Board {
     
     void move(Position source, Position target) {
         Piece piece = findPiece(source);
-        replacePiece(source, Piece.createBlank(source));
+        replacePiece(source, Blank.create(source));
         replacePiece(target, piece);
     }
 
