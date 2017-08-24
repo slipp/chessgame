@@ -2,7 +2,7 @@ package pieces;
 
 import java.util.List;
 
-public class Piece {
+public abstract class Piece {
     public enum Color {
         WHITE, BLACK, NOCOLOR;
     }
@@ -65,11 +65,11 @@ public class Piece {
         return isWhite() ? this.type.getWhiteRepresentation() : this.type.getBlackRepresentation();
     }
     
-    public boolean isWhite() {
+    boolean isWhite() {
         return matchColor(Color.WHITE);
     }
     
-    public boolean isBlack() {
+    boolean isBlack() {
         return matchColor(Color.BLACK);
     }
     
@@ -107,8 +107,12 @@ public class Piece {
     }
     
     public void move(Position target) {
+        verifyMovePosition(target);
+        
         this.position = target;
     }
+    
+    public abstract void verifyMovePosition(Position target);
     
     @Override
     public int hashCode() {

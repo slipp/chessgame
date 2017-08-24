@@ -12,4 +12,9 @@ public class Queen extends Piece {
     public static Queen createBlack(Position position) {
         return new Queen(Color.BLACK, position);
     }
+
+    @Override
+    public void verifyMovePosition(Position target) {
+        
+    }
 }

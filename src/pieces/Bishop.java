@@ -12,4 +12,8 @@ public class Bishop extends Piece {
     public static Bishop createBlack(Position position) {
         return new Bishop(Color.BLACK, position);
     }
+
+    @Override
+    public void verifyMovePosition(Position target) {
+    }
 }

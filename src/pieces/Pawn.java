@@ -16,4 +16,9 @@ public class Pawn extends Piece {
     public static Pawn createBlack(Position position) {
         return new Pawn(Color.BLACK, position);
     }
+
+    @Override
+    public void verifyMovePosition(Position target) {
+        
+    }
 }

@@ -12,4 +12,9 @@ public class Rook extends Piece {
     public static Rook createBlack(Position position) {
         return new Rook(Color.BLACK, position);
     }
+
+    @Override
+    public void verifyMovePosition(Position target) {
+        
+    }
 }

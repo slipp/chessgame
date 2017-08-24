@@ -12,4 +12,9 @@ public class King extends Piece {
     public static King createBlack(Position position) {
         return new King(Color.BLACK, position);
     }
+
+    @Override
+    public void verifyMovePosition(Position target) {
+        
+    }
 }
