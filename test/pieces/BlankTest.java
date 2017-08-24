@@ -1,7 +1,6 @@
 package pieces;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -16,5 +15,11 @@ public class BlankTest {
         assertFalse(blank.isWhite());
         assertFalse(blank.isBlack());
         assertEquals(Type.NO_PIECE, blank.getType());
+    }
+    
+    @Test(expected = InvalidMovePositionException.class)
+    public void verifyMovePosition() throws Exception {
+        Blank blank = Blank.create(new Position("b3"));
+        blank.verifyMovePosition(new Position("b4"));
     }
 }
