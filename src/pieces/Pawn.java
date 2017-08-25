@@ -35,14 +35,14 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public Direction verifyMovePosition(Position target) {
+    public Direction verifyMovePosition(Piece target) {
         List<Direction> directions = isWhite() ? Direction.whitePawnDirection() : Direction.blackPawnDirection();
-        Direction direction = getPosition().direction(target);
+        Direction direction = direction(target);
         if (!directions.contains(direction)) {
             throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
         }
         
-        Degree degree = getPosition().degree(target);
+        Degree degree = degree(target);
         if (!isStartingPosition() && degree.isOverOneYDegree()) {
             throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
         }

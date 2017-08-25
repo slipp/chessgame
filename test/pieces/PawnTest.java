@@ -29,39 +29,39 @@ public class PawnTest extends PieceTest {
     @Test
     public void verifyMovePosition_starting() throws Exception {
         Pawn pawn = Pawn.createWhite(new Position("e2"));
-        pawn.verifyMovePosition(new Position("e3"));
-        pawn.verifyMovePosition(new Position("e4"));
-        pawn.verifyMovePosition(new Position("d3"));
-        pawn.verifyMovePosition(new Position("f3"));
+        pawn.verifyMovePosition(Blank.create(new Position("e3")));
+        pawn.verifyMovePosition(Blank.create(new Position("e4")));
+        pawn.verifyMovePosition(Blank.create(new Position("d3")));
+        pawn.verifyMovePosition(Blank.create(new Position("f3")));
 
         pawn = Pawn.createBlack(new Position("e7"));
-        pawn.verifyMovePosition(new Position("e6"));
-        pawn.verifyMovePosition(new Position("e5"));
-        pawn.verifyMovePosition(new Position("d6"));
-        pawn.verifyMovePosition(new Position("f6"));
+        pawn.verifyMovePosition(Blank.create(new Position("e6")));
+        pawn.verifyMovePosition(Blank.create(new Position("e5")));
+        pawn.verifyMovePosition(Blank.create(new Position("d6")));
+        pawn.verifyMovePosition(Blank.create(new Position("f6")));
     }
 
     @Test(expected = InvalidMovePositionException.class)
     public void verifyMovePosition_non_starting() throws Exception {
         Pawn pawn = Pawn.createWhite(new Position("e3"));
-        pawn.verifyMovePosition(new Position("e5"));
+        pawn.verifyMovePosition(Blank.create(new Position("e5")));
     }
     
     @Test(expected = InvalidMovePositionException.class)
     public void verifyMovePosition_starting_overmove() throws Exception {
         Pawn pawn = Pawn.createWhite(new Position("e2"));
-        pawn.verifyMovePosition(new Position("e5"));
+        pawn.verifyMovePosition(Blank.create(new Position("e5")));
     }
 
     @Test(expected = InvalidMovePositionException.class)
     public void verifyMovePosition_invalid_white() throws Exception {
         Pawn pawn = Pawn.createWhite(new Position("e5"));
-        pawn.verifyMovePosition(new Position("e4"));
+        pawn.verifyMovePosition(Blank.create(new Position("e4")));
     }
 
     @Test(expected = InvalidMovePositionException.class)
     public void verifyMovePosition_invalid_black() throws Exception {
         Pawn pawn = Pawn.createBlack(new Position("e3"));
-        pawn.verifyMovePosition(new Position("e4"));
+        pawn.verifyMovePosition(Blank.create(new Position("e4")));
     }
 }

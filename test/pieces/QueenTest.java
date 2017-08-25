@@ -14,18 +14,17 @@ public class QueenTest extends PieceTest {
     @Test (expected = InvalidMovePositionException.class)
     public void verifyMovePosition_invalid() throws Exception {
         Queen queen= Queen.createWhite(new Position("d4"));
-        queen.verifyMovePosition(new Position("h2"));
+        queen.verifyMovePosition(Pawn.createWhite(new Position("h2")));
     }
     
     @Test
     public void verifyMovePosition() throws Exception {
         Queen queen= Queen.createWhite(new Position("d4"));
-        queen.verifyMovePosition(new Position("a1"));
-        queen.verifyMovePosition(new Position("a4"));
-        queen.verifyMovePosition(new Position("a7"));
-        queen.verifyMovePosition(new Position("h4"));
-        queen.verifyMovePosition(new Position("h8"));
-        queen.verifyMovePosition(new Position("d1"));
-        queen.verifyMovePosition(new Position("d8"));
+        queen.verifyMovePosition(Blank.create(new Position("a1")));
+        queen.verifyMovePosition(Blank.create(new Position("a7")));
+        queen.verifyMovePosition(Blank.create(new Position("h4")));
+        queen.verifyMovePosition(Blank.create(new Position("h8")));
+        queen.verifyMovePosition(Blank.create(new Position("d1")));
+        queen.verifyMovePosition(Blank.create(new Position("d8")));
     }
 }

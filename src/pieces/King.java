@@ -16,10 +16,10 @@ public class King extends Piece {
     }
     
     @Override
-    public Direction verifyMovePosition(Position target) {
+    public Direction verifyMovePosition(Piece target) {
         Direction direction = super.verifyMovePosition(target);
         
-        Degree degree = getPosition().degree(target);
+        Degree degree = degree(target);
         if (degree.isOverOneXDegree() || degree.isOverOneYDegree()) {
             throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
         }

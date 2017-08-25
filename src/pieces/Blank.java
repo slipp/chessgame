@@ -10,7 +10,7 @@ public class Blank extends Piece {
     }
 
     @Override
-    public Direction verifyMovePosition(Position target) {
+    public Direction verifyMovePosition(Piece target) {
         throw new InvalidMovePositionException("말이 아니라 이동할 수 없습니다.");
     }
 }

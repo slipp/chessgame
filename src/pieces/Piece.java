@@ -3,6 +3,8 @@ package pieces;
 import java.util.ArrayList;
 import java.util.List;
 
+import pieces.Position.Degree;
+
 public abstract class Piece {
     public enum Color {
         WHITE, BLACK, NOCOLOR;
@@ -114,19 +116,42 @@ public abstract class Piece {
         return this.type.getDefaultPoint();
     }
     
-    public void move(Position target) {
+    public void move(Piece target) {
         verifyMovePosition(target);
-        
-        this.position = target;
+        this.position = target.position;
     }
     
-    public Direction verifyMovePosition(Position target) {
-        Direction direction = position.direction(target);
+    public Direction verifyMovePosition(Piece target) {
+        if (isSameTeam(target)) {
+            throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
+        }
+        
+        Direction direction = position.direction(target.position);
         if (!directions.contains(direction)) {
             throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
         }
         
         return direction;
+    }
+    
+    protected boolean isSameTeam(Piece target) {
+        if (isWhite() && target.isWhite()) {
+            return true;
+        }
+        
+        if (isBlack() && target.isBlack()) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    protected Degree degree(Piece target) {
+        return position.degree(target.position);
+    }
+    
+    protected Direction direction(Piece target) {
+        return position.direction(target.position);
     }
     
     @Override

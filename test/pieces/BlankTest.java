@@ -20,6 +20,6 @@ public class BlankTest {
     @Test(expected = InvalidMovePositionException.class)
     public void verifyMovePosition() throws Exception {
         Blank blank = Blank.create(new Position("b3"));
-        blank.verifyMovePosition(new Position("b4"));
+        blank.verifyMovePosition(Blank.create(new Position("b4")));
     }
 }
