@@ -53,8 +53,8 @@ public class Board {
 
     void move(Position source, Position target) {
         Piece piece = findPiece(source);
-        replacePiece(Blank.create(source));
         piece.move(findPiece(target));
+        replacePiece(Blank.create(source));
         replacePiece(piece);
     }
 

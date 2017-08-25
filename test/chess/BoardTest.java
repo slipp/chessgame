@@ -114,7 +114,7 @@ public class BoardTest {
     }
     
     @Test
-    public void move() throws Exception {
+    public void move_valid() throws Exception {
         board.initialize();
         
         Position sourcePosition = new Position("b2");

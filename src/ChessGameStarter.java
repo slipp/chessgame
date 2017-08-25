@@ -3,6 +3,7 @@
 import java.util.Scanner;
 
 import chess.ChessGame;
+import pieces.InvalidMovePositionException;
 import view.ChessView;
 
 public class ChessGameStarter {
@@ -23,7 +24,12 @@ public class ChessGameStarter {
                 System.out.println(chessView.view(chessGame.getBoard()));
             } else if (command.startsWith("move")) {
                 String[] values = command.split(" ");
-                chessGame.move(values[1], values[2]);
+                
+                try {
+                    chessGame.move(values[1], values[2]);
+                } catch (InvalidMovePositionException e) {
+                    System.out.println(e.getMessage());
+                }
                 System.out.println(chessView.view(chessGame.getBoard()));
             } else if (command.equals("end")) {
                 break;
