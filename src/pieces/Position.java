@@ -38,6 +38,28 @@ public class Position {
     public Direction direction(Position target) {
         return Direction.valueOf(target.x - this.x, target.y - this.y);
     }
+    
+    public Degree degree(Position target) {
+        return new Degree(target.x - this.x, target.y - this.y);
+    }
+    
+    public static class Degree {
+        private int xDegree;
+        private int yDegree;
+
+        private Degree(int xDegree, int yDegree) {
+            this.xDegree = xDegree;
+            this.yDegree = yDegree;
+        }
+
+        public boolean isOverOneXDegree() {
+            return xDegree > 1;
+        }
+        
+        public boolean isOverOneYDegree() {
+            return yDegree > 1;
+        }
+    }
 
     @Override
     public int hashCode() {

@@ -18,7 +18,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public void verifyMovePosition(Position target) {
-        
+    public Direction verifyMovePosition(Position target) {
+        return null;
     }
 }

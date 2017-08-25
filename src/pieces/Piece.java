@@ -42,13 +42,22 @@ public abstract class Piece {
     private Type type;
 
     private Position position;
-    
+
+    private List<Direction> directions;
+
     protected Piece(Color color, Type type, Position position) {
         this.color = color;
         this.type = type;
         this.position = position;
     }
-
+    
+    protected Piece(Color color, Type type, Position position, List<Direction> directions) {
+        this.color = color;
+        this.type = type;
+        this.position = position;
+        this.directions = directions;
+    }
+    
     Color getColor() {
         return color;
     }
@@ -112,7 +121,14 @@ public abstract class Piece {
         this.position = target;
     }
     
-    public abstract void verifyMovePosition(Position target);
+    public Direction verifyMovePosition(Position target) {
+        Direction direction = position.direction(target);
+        if (!directions.contains(direction)) {
+            throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
+        }
+        
+        return direction;
+    }
     
     @Override
     public int hashCode() {

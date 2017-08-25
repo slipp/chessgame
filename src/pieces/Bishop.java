@@ -2,7 +2,7 @@ package pieces;
 
 public class Bishop extends Piece {
     Bishop(Color color, Position position) {
-        super(color, Type.BISHOP, position);
+        super(color, Type.BISHOP, position, Direction.diagonalDirection());
     }
     
     public static Bishop createWhite(Position position) {
@@ -11,9 +11,5 @@ public class Bishop extends Piece {
     
     public static Bishop createBlack(Position position) {
         return new Bishop(Color.BLACK, position);
-    }
-
-    @Override
-    public void verifyMovePosition(Position target) {
     }
 }

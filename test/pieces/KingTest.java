@@ -20,7 +20,11 @@ public class KingTest extends PieceTest {
     
     @Test
     public void verifyMovePosition() throws Exception {
-        King king = King.createWhite(new Position("d1"));
-        king.verifyMovePosition(new Position("e2"));
+        King king = King.createWhite(new Position("f5"));
+        king.verifyMovePosition(new Position("f6"));
+        king.verifyMovePosition(new Position("e5"));
+        king.verifyMovePosition(new Position("g5"));
+        king.verifyMovePosition(new Position("g6"));
+        king.verifyMovePosition(new Position("e4"));
     }
 }

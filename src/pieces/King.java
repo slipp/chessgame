@@ -1,10 +1,10 @@
 package pieces;
 
-import java.util.List;
+import pieces.Position.Degree;
 
 public class King extends Piece {
     private King(Color color, Position position) {
-        super(color, Type.KING, position);
+        super(color, Type.KING, position, Direction.everyDirection());
     }
     
     public static King createWhite(Position position) {
@@ -14,14 +14,16 @@ public class King extends Piece {
     public static King createBlack(Position position) {
         return new King(Color.BLACK, position);
     }
-
+    
     @Override
-    public void verifyMovePosition(Position target) {
-        System.out.println("Target Position : " + target);
-        List<Direction> directions = Direction.everyDirection();
-        Direction direction = getPosition().direction(target);
-        if (!directions.contains(direction)) {
+    public Direction verifyMovePosition(Position target) {
+        Direction direction = super.verifyMovePosition(target);
+        
+        Degree degree = getPosition().degree(target);
+        if (degree.isOverOneXDegree() || degree.isOverOneYDegree()) {
             throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
         }
+        
+        return direction;
     }
 }
