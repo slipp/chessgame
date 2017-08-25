@@ -1,20 +1,50 @@
 package pieces;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Position {
+    public static final int ROW_SIZE = 8;
+    public static final int COLUMN_SIZE = 8;
+    
     private int x;
     private int y;
     
     public Position(String position) {
-        this.x = position.charAt(0) - 'a';
-        this.y = Character.getNumericValue(position.charAt(1)) - 1;
+        if (position.length() != 2) {
+            throw new InvalidPositionException(position + "은 유효한 위치가 아닙니다.");
+        }
+        
+        this.x = getX(position);
+        this.y = getY(position);
+        
+        valid(x, y);
     }
-    
+
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
+        
+        valid(x, y);
+    }
+
+    private void valid(int x, int y) {
+        if (x < 0 || x >= COLUMN_SIZE) {
+            throw new InvalidPositionException(String.format("X : %d, Y : %d 는 유효한 위치가 아닙니다.", x, y));
+        }
+        
+        if (y < 0 || y >= ROW_SIZE) {
+            throw new InvalidPositionException(String.format("X : %d, Y : %d 는 유효한 위치가 아닙니다.", x, y));
+        }
+    }
+    
+    private static int getX(String position) {
+        return position.charAt(0) - 'a';
+    }
+    
+    private static int getY(String position) {
+        return Character.getNumericValue(position.charAt(1)) - 1;
     }
 
     public int getX() {
@@ -30,9 +60,25 @@ public class Position {
     }
     
     public List<Position> getColumnNeighbors() {
-        return Arrays.asList(
-                new Position(getX(), getY() - 1), 
-                new Position(getX(), getY() + 1));
+        List<Position> columnNeighbors = new ArrayList<>();
+        Optional<Position> position = createPosition(getX(), getY() - 1);
+        if (position.isPresent()) {
+            columnNeighbors.add(position.get());
+        }
+        
+        position = createPosition(getX(), getY() + 1);
+        if (position.isPresent()) {
+            columnNeighbors.add(position.get());
+        }
+        return columnNeighbors;
+    }
+    
+    private Optional<Position> createPosition(int x, int y) {
+        try {
+            return Optional.of(new Position(x, y));
+        } catch (InvalidPositionException e) {
+            return Optional.empty();
+        }
     }
     
     public Direction direction(Position target) {

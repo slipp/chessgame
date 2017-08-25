@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import chess.ChessGame;
 import pieces.InvalidMovePositionException;
+import pieces.InvalidPositionException;
 import view.ChessView;
 
 public class ChessGameStarter {
@@ -27,7 +28,7 @@ public class ChessGameStarter {
                 
                 try {
                     chessGame.move(values[1], values[2]);
-                } catch (InvalidMovePositionException e) {
+                } catch (InvalidMovePositionException | InvalidPositionException e) {
                     System.out.println(e.getMessage());
                 }
                 System.out.println(chessView.view(chessGame.getBoard()));
