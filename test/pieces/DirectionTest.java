@@ -51,6 +51,6 @@ public class DirectionTest {
     
     @Test(expected = InvalidMovePositionException.class)
     public void valueOf_invalid() throws Exception {
-        Direction.valueOf(2, 2);
+        Direction.valueOf(2, 3);
     }
 }

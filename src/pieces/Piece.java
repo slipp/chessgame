@@ -1,5 +1,6 @@
 package pieces;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Piece {
@@ -46,9 +47,7 @@ public abstract class Piece {
     private List<Direction> directions;
 
     protected Piece(Color color, Type type, Position position) {
-        this.color = color;
-        this.type = type;
-        this.position = position;
+        this(color, type, position, new ArrayList<Direction>());
     }
     
     protected Piece(Color color, Type type, Position position, List<Direction> directions) {

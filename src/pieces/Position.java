@@ -59,6 +59,10 @@ public class Position {
         public boolean isOverOneYDegree() {
             return yDegree > 1;
         }
+        
+        public boolean isUnderThreeYDegree() {
+            return yDegree > -3 && yDegree < 3;
+        }
     }
 
     @Override
