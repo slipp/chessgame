@@ -9,9 +9,12 @@ $(function(){
       	if ( value == 0 ) {
       		source = position;
       	} else {
-	    	var moveUrl = "/move?source=" + source + "&target=" + position;
-	    	console.log(moveUrl);
-	    	$(location).attr('href',moveUrl);
+      		$chessForm = $('#chessForm');
+      		$chessForm.find('#source').val(source);
+      		console.log($chessForm.find('#source').val());
+      		$chessForm.find('#target').val(position);
+      		console.log($chessForm.find('#target').val());
+      		$chessForm.submit();
       	}
       	
       	index++;

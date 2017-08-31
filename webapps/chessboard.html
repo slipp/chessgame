@@ -49,6 +49,11 @@ a {
 	-moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, .4);
 	-webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, .4);
 }
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
 </style>
 </head>
 <body>
@@ -167,6 +172,12 @@ a {
 					</div>
 					<div class="panel-body">24</div>
 				</div>
+			</div>
+			<div class="hidden">
+				<form id="chessForm" method="post" action="/move">
+					<input id="source" type="hidden" name="source" />
+					<input id="target" type="hidden" name="target" />
+				</form>
 			</div>
 		</div>
 	</div>
