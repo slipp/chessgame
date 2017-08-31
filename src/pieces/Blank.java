@@ -13,4 +13,14 @@ public class Blank extends Piece {
     public Direction verifyMovePosition(Piece target) {
         throw new InvalidMovePositionException("말이 아니라 이동할 수 없습니다.");
     }
+
+    @Override
+    protected String getWhiteSymbol() {
+        return "";
+    }
+
+    @Override
+    protected String getBlackSymbol() {
+        return "";
+    }
 }

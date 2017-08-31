@@ -3,6 +3,7 @@ package chess;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 import pieces.Blank;
 import pieces.Piece;
@@ -78,5 +79,14 @@ public class Board {
     
     public List<Rank> getRanks() {
         return Collections.unmodifiableList(ranks);
+    }
+    
+    public List<Rank> getReverseRanks() {
+        List<Rank> reverseRanks = new ArrayList<>();
+        ListIterator<Rank> rankIter = ranks.listIterator(ranks.size());
+        while (rankIter.hasPrevious()) {
+            reverseRanks.add(rankIter.previous());
+        }
+        return Collections.unmodifiableList(reverseRanks);
     }
 }

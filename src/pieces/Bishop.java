@@ -12,4 +12,14 @@ public class Bishop extends Piece {
     public static Bishop createBlack(Position position) {
         return new Bishop(Color.BLACK, position);
     }
+
+    @Override
+    protected String getWhiteSymbol() {
+        return "&#9815;";
+    }
+
+    @Override
+    protected String getBlackSymbol() {
+        return "&#9821;";
+    }
 }

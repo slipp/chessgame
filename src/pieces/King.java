@@ -26,4 +26,14 @@ public class King extends Piece {
         
         return direction;
     }
+
+    @Override
+    protected String getWhiteSymbol() {
+        return "&#9812;";
+    }
+
+    @Override
+    protected String getBlackSymbol() {
+        return "&#9818;";
+    }
 }

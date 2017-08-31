@@ -12,4 +12,14 @@ public class Knight extends Piece {
     public static Knight createBlack(Position position) {
         return new Knight(Color.BLACK, position);
     }
+
+    @Override
+    protected String getWhiteSymbol() {
+        return "&#9816;";
+    }
+
+    @Override
+    protected String getBlackSymbol() {
+        return "&#9822;";
+    }
 }

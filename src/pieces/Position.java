@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public class Position {
+    private static final String X_ALPHABET = "abcdefgh";
     public static final int ROW_SIZE = 8;
     public static final int COLUMN_SIZE = 8;
     
     private int x;
     private int y;
+    private String charPosition;
     
     public Position(String position) {
         if (position.length() != 2) {
@@ -18,6 +20,7 @@ public class Position {
         
         this.x = getX(position);
         this.y = getY(position);
+        this.charPosition = position;
         
         valid(x, y);
     }
@@ -27,8 +30,10 @@ public class Position {
         this.y = y;
         
         valid(x, y);
+        
+        this.charPosition = formatIntToString(x, y);
     }
-
+    
     private void valid(int x, int y) {
         if (x < 0 || x >= COLUMN_SIZE) {
             throw new InvalidPositionException(String.format("X : %d, Y : %d 는 유효한 위치가 아닙니다.", x, y));
@@ -37,6 +42,10 @@ public class Position {
         if (y < 0 || y >= ROW_SIZE) {
             throw new InvalidPositionException(String.format("X : %d, Y : %d 는 유효한 위치가 아닙니다.", x, y));
         }
+    }
+    
+    private static String formatIntToString(int x, int y) {
+        return X_ALPHABET.charAt(x) + "" + (y + 1);
     }
     
     private static int getX(String position) {
@@ -53,6 +62,10 @@ public class Position {
     
     public int getY() {
         return y;
+    }
+    
+    public String getCharPosition() {
+        return charPosition;
     }
     
     public Position movePosition(Direction direction) {

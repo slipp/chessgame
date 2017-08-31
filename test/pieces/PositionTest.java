@@ -12,6 +12,13 @@ public class PositionTest {
         Position position = new Position("a1");
         assertEquals(0, position.getX());
         assertEquals(0, position.getY());
+        assertEquals("a1", position.getCharPosition());
+    }
+    
+    @Test
+    public void create_xy() throws Exception {
+        Position position = new Position(0, 0);
+        assertEquals("a1", position.getCharPosition());
     }
     
     @Test(expected = InvalidPositionException.class)

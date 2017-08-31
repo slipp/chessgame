@@ -53,4 +53,14 @@ public class Pawn extends Piece {
         
         return direction;
     }
+
+    @Override
+    protected String getWhiteSymbol() {
+        return "&#9817;";
+    }
+
+    @Override
+    protected String getBlackSymbol() {
+        return "&#9823;";
+    }
 }

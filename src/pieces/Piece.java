@@ -154,6 +154,14 @@ public abstract class Piece {
         return position.direction(target.position);
     }
     
+    public String getSymbol() {
+        return isWhite() ? getWhiteSymbol() : getBlackSymbol();
+    }
+    
+    protected abstract String getWhiteSymbol();
+    
+    protected abstract String getBlackSymbol();
+    
     @Override
     public int hashCode() {
         final int prime = 31;
