@@ -11,7 +11,6 @@ public class Position {
     
     private int x;
     private int y;
-    private String charPosition;
     
     public Position(String position) {
         if (position.length() != 2) {
@@ -20,7 +19,6 @@ public class Position {
         
         this.x = getX(position);
         this.y = getY(position);
-        this.charPosition = position;
         
         valid(x, y);
     }
@@ -30,8 +28,6 @@ public class Position {
         this.y = y;
         
         valid(x, y);
-        
-        this.charPosition = formatIntToString(x, y);
     }
     
     private void valid(int x, int y) {
@@ -42,10 +38,6 @@ public class Position {
         if (y < 0 || y >= ROW_SIZE) {
             throw new InvalidPositionException(String.format("X : %d, Y : %d 는 유효한 위치가 아닙니다.", x, y));
         }
-    }
-    
-    private static String formatIntToString(int x, int y) {
-        return X_ALPHABET.charAt(x) + "" + (y + 1);
     }
     
     private static int getX(String position) {
@@ -65,7 +57,7 @@ public class Position {
     }
     
     public String getCharPosition() {
-        return charPosition;
+        return X_ALPHABET.charAt(x) + "" + (y + 1);
     }
     
     public Position movePosition(Direction direction) {
