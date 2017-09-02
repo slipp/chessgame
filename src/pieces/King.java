@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.List;
+
 import pieces.Position.Degree;
 
 public class King extends Piece {
@@ -16,15 +18,15 @@ public class King extends Piece {
     }
     
     @Override
-    public Direction verifyMovePosition(Piece target) {
-        Direction direction = super.verifyMovePosition(target);
+    public List<Position> verifyMovePosition(Piece target) {
+        List<Position> positions = super.verifyMovePosition(target);
         
-        Degree degree = degree(target);
+        Degree degree = degree(target.getPosition());
         if (degree.isOverOneXDegree() || degree.isOverOneYDegree()) {
             throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
         }
         
-        return direction;
+        return positions;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package pieces;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -57,5 +56,12 @@ public class PositionTest {
         position = new Position("a1");
         neighboars = position.getColumnNeighbors();
         assertTrue(neighboars.contains(new Position("a2")));
+    }
+    
+    @Test
+    public void getMovablePositions() throws Exception {
+        Position position = new Position("a2");
+        List<Position> positions = position.getMovablePositions(Direction.EAST, new Position("d2"));
+        assertEquals(2, positions.size());
     }
 }

@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.List;
+
 public class Blank extends Piece {
     private Blank(Position position) {
         super(Color.NOCOLOR, Type.NO_PIECE, position);
@@ -10,7 +12,7 @@ public class Blank extends Piece {
     }
 
     @Override
-    public Direction verifyMovePosition(Piece target) {
+    public List<Position> verifyMovePosition(Piece target) {
         throw new InvalidMovePositionException("말이 아니라 이동할 수 없습니다.");
     }
 
@@ -28,5 +30,4 @@ public class Blank extends Piece {
     Direction direction(Position source, Position target) {
         return null;
     }
-
 }

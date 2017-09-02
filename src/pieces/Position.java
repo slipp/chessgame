@@ -86,13 +86,23 @@ public class Position {
         }
     }
     
+    public List<Position> getMovablePositions(Direction direction, Position target) {
+        List<Position> movablePositions = new ArrayList<>();
+        getMovablePositions(movablePositions, direction, target);
+        return movablePositions;
+    }
+
+    private void getMovablePositions(List<Position> movablePositions, Direction direction, Position target) {
+        Position movablePosition = new Position(getX() + direction.getXDegree(), getY() + direction.getYDegree());
+        if (!movablePosition.equals(target)) {
+            movablePositions.add(movablePosition);
+            movablePosition.getMovablePositions(movablePositions, direction, target);
+        }
+    }
+    
     public Direction directionOf(Position target) {
         return Direction.valueOf(target.x - this.x, target.y - this.y);
     }
-    
-    public Direction directionOfPawn(Position target) {
-        return Direction.valueOfPawn(target.x - this.x, target.y - this.y);
-    }    
     
     public Direction directionOfDiagonal(Position target) {
         return Direction.valueOfDiagonal(target.x - this.x, target.y - this.y);

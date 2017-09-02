@@ -108,17 +108,17 @@ public abstract class Piece {
         return this.type.getDefaultPoint();
     }
     
-    public void move(Piece target) {
-        verifyMovePosition(target);
-        this.position = target.position;
+    public void move(Position target) {
+        this.position = target;
     }
     
-    public Direction verifyMovePosition(Piece target) throws InvalidMovePositionException {
+    public List<Position> verifyMovePosition(Piece target) throws InvalidMovePositionException {
         if (isSameTeam(target)) {
             throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
         }
         
-        return direction(position, target.position);
+        Direction direction = direction(position, target.position);
+        return position.getMovablePositions(direction, target.position);
     }
     
     abstract Direction direction(Position source, Position target);
@@ -135,8 +135,8 @@ public abstract class Piece {
         return false;
     }
     
-    protected Degree degree(Piece target) {
-        return position.degree(target.position);
+    protected Degree degree(Position target) {
+        return position.degree(target);
     }
     
     public String getSymbol() {

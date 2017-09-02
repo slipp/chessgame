@@ -54,7 +54,12 @@ public class Board {
 
     void move(Position source, Position target) {
         Piece piece = findPiece(source);
-        piece.move(findPiece(target));
+        List<Position> moreCheckedPositions = piece.verifyMovePosition(findPiece(target));
+        if (moreCheckedPositions.isEmpty()) {
+            piece.move(target);
+        } else {
+            
+        }
         replacePiece(Blank.create(source));
         replacePiece(piece);
     }

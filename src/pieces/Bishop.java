@@ -27,5 +27,4 @@ public class Bishop extends Piece {
     Direction direction(Position source, Position target) {
         return source.directionOfDiagonal(target);
     }
-
 }

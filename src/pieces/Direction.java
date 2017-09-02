@@ -5,10 +5,12 @@ import java.util.List;
 
 public enum Direction {
 	NORTH(0, 1),
+	NORTHTWO(0, 2),
 	NORTHEAST(1, 1),
 	EAST(1, 0),
 	SOUTHEAST(1, -1),
 	SOUTH(0, -1),
+	SOUTHTWO(0, -2),
 	SOUTHWEST(-1, -1),
 	WEST(-1, 0),
 	NORTHWEST(-1, 1),
@@ -69,10 +71,6 @@ public enum Direction {
         throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
     }
     
-    public static Direction valueOfPawn(int x, int y) throws InvalidMovePositionException {
-        return valueOf(convertToOne(x), convertToOne(y));
-    }
-    
     public static Direction valueOfDiagonal(int x, int y) throws InvalidMovePositionException {
         int remainder = x % y;
         
@@ -116,10 +114,10 @@ public enum Direction {
     }
     
     public static List<Direction> whitePawnDirection() {
-        return Arrays.asList(NORTH, NORTHEAST, NORTHWEST);
+        return Arrays.asList(NORTH, NORTHTWO, NORTHEAST, NORTHWEST);
     }
     
     public static List<Direction> blackPawnDirection() {
-        return Arrays.asList(SOUTH, SOUTHEAST, SOUTHWEST);
+        return Arrays.asList(SOUTH, SOUTHTWO, SOUTHEAST, SOUTHWEST);
     }
 }
