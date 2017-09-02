@@ -18,14 +18,14 @@ public class ChessController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("chessGame", chessGame);
+        model.addAttribute("chessGame", ChessDto.from(chessGame));
         return "chessboard";
     }
     
     @PostMapping("/move")
     public String move(String source, String target, Model model) {
         chessGame.move(source, target);
-        model.addAttribute("chessGame", chessGame);
+        model.addAttribute("chessGame", ChessDto.from(chessGame));
         return "chessboard";
     }
 }
