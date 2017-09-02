@@ -2,7 +2,7 @@ package pieces;
 
 public class Bishop extends Piece {
     Bishop(Color color, Position position) {
-        super(color, Type.BISHOP, position, Direction.diagonalDirection());
+        super(color, Type.BISHOP, position);
     }
     
     public static Bishop createWhite(Position position) {
@@ -22,4 +22,10 @@ public class Bishop extends Piece {
     protected String getBlackSymbol() {
         return "&#9821;";
     }
+
+    @Override
+    Direction direction(Position source, Position target) {
+        return source.directionOfDiagonal(target);
+    }
+
 }

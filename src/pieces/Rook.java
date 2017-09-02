@@ -2,7 +2,7 @@ package pieces;
 
 public class Rook extends Piece {
     private Rook(Color color, Position position) {
-        super(color, Type.ROOK, position, Direction.linearDirection());
+        super(color, Type.ROOK, position);
     }
     
     public static Rook createWhite(Position position) {
@@ -21,5 +21,10 @@ public class Rook extends Piece {
     @Override
     protected String getBlackSymbol() {
         return "&#9820;";
+    }
+
+    @Override
+    Direction direction(Position source, Position target) {
+        return source.directionOfLinear(target);
     }
 }

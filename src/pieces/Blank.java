@@ -23,4 +23,10 @@ public class Blank extends Piece {
     protected String getBlackSymbol() {
         return "";
     }
+
+    @Override
+    Direction direction(Position source, Position target) {
+        return null;
+    }
+
 }

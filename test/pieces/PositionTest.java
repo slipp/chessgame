@@ -1,6 +1,7 @@
 package pieces;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -44,14 +45,6 @@ public class PositionTest {
     @Test(expected = InvalidPositionException.class)
     public void create_체스판_COLUMN_크기_큰_경우() throws Exception {
         new Position("i2");
-    }
-    
-    @Test
-    public void direction() throws Exception {
-        Position source = new Position("a1");
-        Position target = new Position("a2");
-        
-        assertEquals(Direction.NORTH, source.direction(target));
     }
     
     @Test

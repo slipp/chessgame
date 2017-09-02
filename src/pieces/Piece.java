@@ -1,6 +1,5 @@
 package pieces;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pieces.Position.Degree;
@@ -46,17 +45,10 @@ public abstract class Piece {
 
     private Position position;
 
-    private List<Direction> directions;
-
     protected Piece(Color color, Type type, Position position) {
-        this(color, type, position, new ArrayList<Direction>());
-    }
-    
-    protected Piece(Color color, Type type, Position position, List<Direction> directions) {
         this.color = color;
         this.type = type;
         this.position = position;
-        this.directions = directions;
     }
     
     Color getColor() {
@@ -121,18 +113,15 @@ public abstract class Piece {
         this.position = target.position;
     }
     
-    public Direction verifyMovePosition(Piece target) {
+    public Direction verifyMovePosition(Piece target) throws InvalidMovePositionException {
         if (isSameTeam(target)) {
             throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
         }
         
-        Direction direction = position.direction(target.position);
-        if (!directions.contains(direction)) {
-            throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
-        }
-        
-        return direction;
+        return direction(position, target.position);
     }
+    
+    abstract Direction direction(Position source, Position target);
     
     protected boolean isSameTeam(Piece target) {
         if (isWhite() && target.isWhite()) {
@@ -148,10 +137,6 @@ public abstract class Piece {
     
     protected Degree degree(Piece target) {
         return position.degree(target.position);
-    }
-    
-    protected Direction direction(Piece target) {
-        return position.direction(target.position);
     }
     
     public String getSymbol() {

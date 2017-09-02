@@ -86,8 +86,24 @@ public class Position {
         }
     }
     
-    public Direction direction(Position target) {
+    public Direction directionOf(Position target) {
         return Direction.valueOf(target.x - this.x, target.y - this.y);
+    }
+    
+    public Direction directionOfPawn(Position target) {
+        return Direction.valueOfPawn(target.x - this.x, target.y - this.y);
+    }    
+    
+    public Direction directionOfDiagonal(Position target) {
+        return Direction.valueOfDiagonal(target.x - this.x, target.y - this.y);
+    }
+    
+    public Direction directionOfLinear(Position target) {
+        return Direction.valueOfLinear(target.x - this.x, target.y - this.y);
+    }
+    
+    public Direction directionOfEvery(Position target) {
+        return Direction.valueOfEvery(target.x - this.x, target.y - this.y);
     }
     
     public Degree degree(Position target) {

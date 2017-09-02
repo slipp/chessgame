@@ -36,8 +36,8 @@ public class Pawn extends Piece {
 
     @Override
     public Direction verifyMovePosition(Piece target) {
+        Direction direction = super.verifyMovePosition(target);
         List<Direction> directions = isWhite() ? Direction.whitePawnDirection() : Direction.blackPawnDirection();
-        Direction direction = direction(target);
         if (!directions.contains(direction)) {
             throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");
         }
@@ -53,7 +53,7 @@ public class Pawn extends Piece {
         
         return direction;
     }
-
+    
     @Override
     protected String getWhiteSymbol() {
         return "&#9817;";
@@ -62,5 +62,10 @@ public class Pawn extends Piece {
     @Override
     protected String getBlackSymbol() {
         return "&#9823;";
+    }
+
+    @Override
+    Direction direction(Position source, Position target) {
+        return source.directionOfPawn(target);
     }
 }

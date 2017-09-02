@@ -2,7 +2,7 @@ package pieces;
 
 public class Queen extends Piece {
     private Queen(Color color, Position position) {
-        super(color, Type.QUEEN, position, Direction.everyDirection());
+        super(color, Type.QUEEN, position);
     }
     
     public static Queen createWhite(Position position) {
@@ -21,5 +21,10 @@ public class Queen extends Piece {
     @Override
     protected String getBlackSymbol() {
         return "&#9819;";
+    }
+
+    @Override
+    Direction direction(Position source, Position target) {
+        return source.directionOfEvery(target);
     }
 }

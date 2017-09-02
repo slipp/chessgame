@@ -4,7 +4,7 @@ import pieces.Position.Degree;
 
 public class King extends Piece {
     private King(Color color, Position position) {
-        super(color, Type.KING, position, Direction.everyDirection());
+        super(color, Type.KING, position);
     }
     
     public static King createWhite(Position position) {
@@ -35,5 +35,10 @@ public class King extends Piece {
     @Override
     protected String getBlackSymbol() {
         return "&#9818;";
+    }
+
+    @Override
+    Direction direction(Position source, Position target) {
+        return source.directionOf(target);
     }
 }

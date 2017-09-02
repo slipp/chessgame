@@ -45,76 +45,58 @@ public enum Direction {
     public boolean isOverOneYDegree() {
         return yDegree > 1;
     }
-
-    public static Direction valueOf(int x, int y) {
-	    if (x == 0 && y == 0) {
-	        throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
-	    }
-	    
-	    Direction[] directions = values();
-	    for (Direction direction : directions) {
+    
+    private static int convertToOne(int number) {
+        if (number == 0) {
+            return 0;
+        }
+        
+        if (number > 0) {
+            return 1;
+        }
+        
+        return -1;
+    }
+    
+    public static Direction valueOf(int x, int y) throws InvalidMovePositionException {
+        Direction[] directions = values();
+        for (Direction direction : directions) {
             if (x == direction.xDegree && y == direction.yDegree) {
                 return direction;
             }
         }
-	    
-	    if (x == 0) {
-	        return getSouthAndNorth(y);
-	    }
-	    
-	    if (y == 0) {
-	        return getEastAndWest(x);
-	    }
-	    
-	    int remainder = x % y;
-	    
-	    if (remainder != 0) {
-	        throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
-	    }
-	    
-	    int quotient = x / y;
-	    
-	    if (quotient == 1) {
-	        return getNorthEastAndSouthWest(x);
-	    }
-	    
-	    if (quotient == -1) {
-            return getNorthWestAndSouthEast(x);
-        }
-	    
+        
         throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
     }
-
-    private static Direction getNorthWestAndSouthEast(int x) {
-        if (x > 0) {
-            return Direction.SOUTHEAST;
-        }
-
-        return Direction.NORTHWEST;
+    
+    public static Direction valueOfPawn(int x, int y) throws InvalidMovePositionException {
+        return valueOf(convertToOne(x), convertToOne(y));
     }
-
-    private static Direction getNorthEastAndSouthWest(int x) {
-        if (x > 0) {
-            return Direction.NORTHEAST;
+    
+    public static Direction valueOfDiagonal(int x, int y) throws InvalidMovePositionException {
+        int remainder = x % y;
+        
+        if (remainder != 0) {
+            throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
         }
-
-        return Direction.SOUTHWEST;
+        
+        return valueOf(convertToOne(x), convertToOne(y));
     }
-
-    private static Direction getEastAndWest(int x) {
-        if (x > 0) {
-            return Direction.EAST;
+    
+    public static Direction valueOfLinear(int x, int y) throws InvalidMovePositionException {
+        if (x != 0 && y != 0) {
+            throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
         }
-
-        return Direction.WEST;
+        
+        return valueOf(convertToOne(x), convertToOne(y));
     }
-
-    private static Direction getSouthAndNorth(int y) {
-        if (y > 0) {
-            return Direction.NORTH;
+    
+    public static Direction valueOfEvery(int x, int y) throws InvalidMovePositionException {
+        try {
+            return valueOfLinear(x, y);
+        } catch (InvalidMovePositionException e) {
+            return valueOfDiagonal(x, y);
         }
-
-        return Direction.SOUTH;
     }
 
     public static List<Direction> linearDirection() {
