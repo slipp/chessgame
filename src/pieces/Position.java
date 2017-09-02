@@ -93,55 +93,17 @@ public class Position {
     }
 
     private void getMovablePositions(List<Position> movablePositions, Direction direction, Position target) {
-        Position movablePosition = new Position(getX() + direction.getXDegree(), getY() + direction.getYDegree());
+        Position movablePosition = movePosition(direction); 
         if (!movablePosition.equals(target)) {
             movablePositions.add(movablePosition);
             movablePosition.getMovablePositions(movablePositions, direction, target);
         }
     }
     
-    public Direction directionOf(Position target) {
-        return Direction.valueOf(target.x - this.x, target.y - this.y);
-    }
-    
-    public Direction directionOfDiagonal(Position target) {
-        return Direction.valueOfDiagonal(target.x - this.x, target.y - this.y);
-    }
-    
-    public Direction directionOfLinear(Position target) {
-        return Direction.valueOfLinear(target.x - this.x, target.y - this.y);
-    }
-    
-    public Direction directionOfEvery(Position target) {
-        return Direction.valueOfEvery(target.x - this.x, target.y - this.y);
-    }
-    
     public Degree degree(Position target) {
         return new Degree(target.x - this.x, target.y - this.y);
     }
     
-    public static class Degree {
-        private int xDegree;
-        private int yDegree;
-
-        private Degree(int xDegree, int yDegree) {
-            this.xDegree = xDegree;
-            this.yDegree = yDegree;
-        }
-
-        public boolean isOverOneXDegree() {
-            return xDegree > 1;
-        }
-        
-        public boolean isOverOneYDegree() {
-            return yDegree > 1;
-        }
-        
-        public boolean isUnderThreeYDegree() {
-            return yDegree > -3 && yDegree < 3;
-        }
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -171,4 +133,67 @@ public class Position {
     public String toString() {
         return "Position [x=" + x + ", y=" + y + "]";
     }
+    
+    public static class Degree {
+        private int xDegree;
+        private int yDegree;
+
+        private Degree(int xDegree, int yDegree) {
+            this.xDegree = xDegree;
+            this.yDegree = yDegree;
+        }
+        
+        public int getXDegree() {
+            return xDegree;
+        }
+        
+        public int getYDegree() {
+            return yDegree;
+        }
+        
+        public Degree getDegreeOne() {
+            return new Degree(convertToOne(xDegree), convertToOne(yDegree));
+        }
+
+        public boolean isOverOneXDegree() {
+            return xDegree > 1;
+        }
+        
+        public boolean isOverOneYDegree() {
+            return yDegree > 1;
+        }
+        
+        public boolean isUnderThreeYDegree() {
+            return yDegree > -3 && yDegree < 3;
+        }
+        
+        public boolean isLinear() {
+            return xDegree == 0 || yDegree == 0;
+        }
+
+        public boolean isDiagonal() {
+            try {
+                int remainder = xDegree % yDegree;
+                return remainder == 0;
+            } catch (ArithmeticException e) {
+                return false;
+            }
+        }
+        
+        public static Degree of(int xDegree, int yDegree) {
+            return new Degree(xDegree, yDegree);
+        }
+
+        public static int convertToOne(int number) {
+            if (number == 0) {
+                return 0;
+            }
+            
+            if (number > 0) {
+                return 1;
+            }
+            
+            return -1;
+        }
+    }    
 }

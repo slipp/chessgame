@@ -46,7 +46,7 @@ public class Pawn extends Piece {
     
     @Override
     Direction direction(Position source, Position target) {
-        Direction direction = source.directionOf(target);
+        Direction direction = Direction.valueOf(source.degree(target));
         List<Direction> directions = isWhite() ? Direction.whitePawnDirection() : Direction.blackPawnDirection();
         if (!directions.contains(direction)) {
             throw new InvalidMovePositionException(target + " 위치는 이동할 수 없는 위치입니다.");

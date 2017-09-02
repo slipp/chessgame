@@ -25,6 +25,6 @@ public class Bishop extends Piece {
 
     @Override
     Direction direction(Position source, Position target) {
-        return source.directionOfDiagonal(target);
+        return Direction.valueOfDiagonal(source.degree(target));
     }
 }

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pieces.Blank;
+import pieces.InvalidMovePositionException;
 import pieces.King;
 import pieces.Pawn;
 import pieces.Piece;
@@ -122,6 +123,15 @@ public class BoardTest {
         board.move(sourcePosition, targetPosition);
         assertEquals(Blank.create(sourcePosition), board.findPiece(sourcePosition));
         assertEquals(Pawn.createWhite(targetPosition), board.findPiece(targetPosition));
+    }
+    
+    @Test(expected = InvalidMovePositionException.class)
+    public void move_invalid() throws Exception {
+        board.initialize();
+        
+        Position sourcePosition = new Position("a1");
+        Position targetPosition = new Position("a4");
+        board.move(sourcePosition, targetPosition);
     }
     
     private void addPiece(Piece piece) {

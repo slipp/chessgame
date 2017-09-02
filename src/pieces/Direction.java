@@ -3,6 +3,8 @@ package pieces;
 import java.util.Arrays;
 import java.util.List;
 
+import pieces.Position.Degree;
+
 public enum Direction {
 	NORTH(0, 1),
 	NORTHTWO(0, 2),
@@ -40,24 +42,32 @@ public enum Direction {
         return yDegree;
     }
     
-    public boolean isOverOneXDegree() {
-        return xDegree > 1;
+    public static Direction valueOf(Degree degree) throws InvalidMovePositionException {
+        return valueOf(degree.getXDegree(), degree.getYDegree());
     }
     
-    public boolean isOverOneYDegree() {
-        return yDegree > 1;
+    public static Direction valueOfDiagonal(Degree degree) throws InvalidMovePositionException {
+        if (!degree.isDiagonal()) {
+            throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
+        }
+        
+        return valueOf(degree.getDegreeOne());
     }
     
-    private static int convertToOne(int number) {
-        if (number == 0) {
-            return 0;
+    public static Direction valueOfLinear(Degree degree) throws InvalidMovePositionException {
+        if (!degree.isLinear()) {
+            throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
         }
         
-        if (number > 0) {
-            return 1;
+        return valueOf(degree.getDegreeOne());
+    }
+    
+    public static Direction valueOfEvery(Degree degree) {
+        try {
+            return valueOfLinear(degree);
+        } catch (InvalidMovePositionException e) {
+            return valueOfDiagonal(degree);
         }
-        
-        return -1;
     }
     
     public static Direction valueOf(int x, int y) throws InvalidMovePositionException {
@@ -69,32 +79,6 @@ public enum Direction {
         }
         
         throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
-    }
-    
-    public static Direction valueOfDiagonal(int x, int y) throws InvalidMovePositionException {
-        int remainder = x % y;
-        
-        if (remainder != 0) {
-            throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
-        }
-        
-        return valueOf(convertToOne(x), convertToOne(y));
-    }
-    
-    public static Direction valueOfLinear(int x, int y) throws InvalidMovePositionException {
-        if (x != 0 && y != 0) {
-            throw new InvalidMovePositionException("유효하지 않은 위치입니다.");
-        }
-        
-        return valueOf(convertToOne(x), convertToOne(y));
-    }
-    
-    public static Direction valueOfEvery(int x, int y) throws InvalidMovePositionException {
-        try {
-            return valueOfLinear(x, y);
-        } catch (InvalidMovePositionException e) {
-            return valueOfDiagonal(x, y);
-        }
     }
 
     public static List<Direction> linearDirection() {

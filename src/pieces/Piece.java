@@ -123,7 +123,7 @@ public abstract class Piece {
     
     abstract Direction direction(Position source, Position target);
     
-    protected boolean isSameTeam(Piece target) {
+    public boolean isSameTeam(Piece target) {
         if (isWhite() && target.isWhite()) {
             return true;
         }

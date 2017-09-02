@@ -25,6 +25,6 @@ public class Knight extends Piece {
 
     @Override
     Direction direction(Position source, Position target) {
-        return source.directionOf(target);
+        return Direction.valueOf(source.degree(target));
     }
 }

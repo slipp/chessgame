@@ -25,6 +25,6 @@ public class Queen extends Piece {
 
     @Override
     Direction direction(Position source, Position target) {
-        return source.directionOfEvery(target);
+        return Direction.valueOfEvery(source.degree(target));
     }
 }

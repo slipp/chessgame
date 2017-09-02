@@ -25,6 +25,6 @@ public class Rook extends Piece {
 
     @Override
     Direction direction(Position source, Position target) {
-        return source.directionOfLinear(target);
+        return Direction.valueOfLinear(source.degree(target));
     }
 }

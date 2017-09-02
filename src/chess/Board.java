@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import pieces.Blank;
+import pieces.InvalidMovePositionException;
 import pieces.Piece;
 import pieces.Piece.Color;
 import pieces.Piece.Type;
@@ -58,10 +59,20 @@ public class Board {
         if (moreCheckedPositions.isEmpty()) {
             piece.move(target);
         } else {
-            
+            verifySameTeam(piece, moreCheckedPositions);
+            piece.move(target);
         }
         replacePiece(Blank.create(source));
         replacePiece(piece);
+    }
+
+    private void verifySameTeam(Piece piece, List<Position> moreCheckedPositions) throws InvalidMovePositionException {
+        for (Position position : moreCheckedPositions) {
+            Piece checkedPiece = findPiece(position);
+            if (piece.isSameTeam(checkedPiece)) {
+                throw new InvalidMovePositionException("이동하는 위치에 같은 팀의 말이 있어 이동할 수 없습니다.");
+            }
+        }
     }
 
     double caculcatePoint(Color color) {
