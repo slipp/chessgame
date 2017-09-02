@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Position {
     private static final String X_ALPHABET = "abcdefgh";
     public static final int ROW_SIZE = 8;
@@ -64,6 +66,7 @@ public class Position {
         return new Position(x + direction.getXDegree(), y + direction.getYDegree());
     }
     
+    @JsonIgnore
     public List<Position> getColumnNeighbors() {
         List<Position> columnNeighbors = new ArrayList<>();
         Optional<Position> position = createPosition(getX(), getY() - 1);
@@ -86,6 +89,7 @@ public class Position {
         }
     }
     
+    @JsonIgnore
     public List<Position> getMovablePositions(Direction direction, Position target) {
         List<Position> movablePositions = new ArrayList<>();
         getMovablePositions(movablePositions, direction, target);

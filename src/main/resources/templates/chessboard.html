@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<style type="text/css">
+a {
+	color: #000;
+	display: block;
+	font-size: 60px;
+	height: 80px;
+	position: relative;
+	text-decoration: none;
+	text-shadow: 0 1px #fff;
+	width: 80px;
+}
+
+#boards {
+	border: 5px solid #333;
+}
+
+#boards td {
+	background: #fff;
+	background: -moz-linear-gradient(top, #fff, #eee);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
+	box-shadow: inset 0 0 0 1px #fff;
+	-moz-box-shadow: inset 0 0 0 1px #fff;
+	-webkit-box-shadow: inset 0 0 0 1px #fff;
+	height: 80px;
+	text-align: center;
+	vertical-align: middle;
+	width: 80px;
+}
+
+#boards tr:nth-child(odd) td:nth-child(even), #boards tr:nth-child(even) td:nth-child(odd)
+	{
+	background: #ccc;
+	background: -moz-linear-gradient(top, #ccc, #eee);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#ccc), to(#eee));
+	box-shadow: inset 0 0 10px rgba(0, 0, 0, .4);
+	-moz-box-shadow: inset 0 0 10px rgba(0, 0, 0, .4);
+	-webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, .4);
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row center-block"> 
+			<div class="col-md-8">
+			<h1>내가 구현한 체스 게임</h1>
+			</div>
+		</div>
+		<div class="row center-block">
+			<div class="col-md-8">
+			<table id="boards" cellpadding="0" cellspacing="0">
+				<tbody>
+					{{#chessGame.board.reverseRanks}}
+					<tr>
+						{{#pieces}}
+						<td id="{{position.charPosition}}"><a href="#">{{{symbol}}}</a></td>
+						{{/pieces}}
+					</tr>					
+					{{/chessGame.board.reverseRanks}}
+				</tbody>
+			</table>
+			</div>
+			<div class="col-md-2">
+				<h1><span class="label label-default">백이 둘 차례</span></h1>
+				<br />
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">&#9819; : 흑 점수</h3>
+					</div>
+					<div class="panel-body">{{chessGame.pointByBlack}}</div>
+				</div>
+				<div class="panel panel-danger">
+					<div class="panel-heading">
+						<h3 class="panel-title">&#9813; : 백 점수</h3>
+					</div>
+					<div class="panel-body">{{chessGame.pointByWhite}}</div>
+				</div>
+			</div>
+			<div class="hidden">
+				<form id="chessForm" method="post" action="/move">
+					<input id="source" type="hidden" name="source" />
+					<input id="target" type="hidden" name="target" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="./js/chessboard.js"></script>
+</body>
+</html>
